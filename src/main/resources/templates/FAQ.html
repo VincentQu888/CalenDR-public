@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta property="og:title" content="CalenDR"/> 
+    <meta property="og:description" content="Providing scheduling assistance when it comes to vaccinations & screenings"/> 
+    <meta property="og:image" content="/imgs/dashboardimg.png" /> 
+    <meta property="og:url" content="[redacted]" />
+
+    <link th:href="@{css/main.css}" rel="stylesheet" /> 
+    <link rel="stylesheet" href="/css/faq.css">
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/shared.css">
+
+    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@1,900,700,500,301,701,300,501,401,901,400,2&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="/imgs/favicon.svg">
+
+    <title>FAQ</title>
+</head>
+
+
+<!--html-->
+<body>
+    <nav id="nav" class="text-xl font-medium">
+        <a href="/" id="home" class="font-extrabold text-3xl mr-4 ml-auto">CalenDR</a>
+        <a href="about" id="about" class="hover:opacity-60">About</a>
+        <a href="contact" id="contact" class="hover:opacity-60">Contact</a>
+        <a href="/FAQ" id="faq" class="hover:opacity-60">Frequently Asked</a>
+        <a href="/login" id="sign-in-button-container" class="mr-auto"><div id="sign-in-button-alt" class="text-xl py-2 px-4 text-white"><span th:text="${signUpText}"></span>&#8594;</div></a>
+        
+        <a id="burger-menu" class="hidden" href="#side-navbar">
+            <embed id="burger-menu-icon" src="/imgs/burger-menu-black.svg"/>
+        </a>
+        <div id="side-navbar">
+            <div class="flex items-center mb-2">
+                <a href="/" class="font-extrabold text-3xl">CalenDR</a>
+                <a href="" class="ml-auto font-bold">&#x2715;</a> 
+            </div>
+            <a href="/about" class="block link">About</a> 
+            <a href="/contact" class="block link">Contact</a> 
+            <a href="/FAQ" class="block link">Frequently Asked</a> 
+            <a href="tos" class="block link">Terms of Service</a> 
+            <a href="signup" class="block link">Sign up</a>
+            <a href="/login" id="sign-in-button-container-mobile" class="mr-auto block"><div id="sign-in-button-mobile" class="text-xl py-2 px-4"><span th:text="${signUpText}"></span>&#8594;</div></a>
+        </div>
+
+        <a id="back-to-top-button" href="#nav"><div id="back-to-top-arrow" class=""></div></a>
+    </nav>
+
+    <section class="pb-32 flex top-padding w-screen">
+        <div class="mx-auto flex w-72-rem">
+            <div class="mr-32 w-36-rem">
+                <div class="mb-16">
+                    <p class="text-xl text-blue font-bold mb-2">FAQ</p>
+                    <p class="text-6xl font-bold mb-4">Frequently Asked Questions.</p>
+                    <p class="text-xl mb-8">Can't find what you're looking for? <a href="contact" class="text-blue hover:opacity-60">Contact support.</a></p>
+                    <div id="mobile-section-faq-nav">
+                        <p class="text-xl font-bold">Sections</p>
+                        <div class="text-blue">
+                            <a href="#general" class="hover:opacity-60">General</a> <br/>
+                            <a href="#account" class="hover:opacity-60">Account</a> <br/>
+                            <a href="#privacy" class="hover:opacity-60">Privacy &amp; Terms</a> <br/>
+                            <a href="#services" class="hover:opacity-60">Services</a> <br/>
+                            <a href="#dashboard" class="hover:opacity-60">Dashboard</a> <br/>
+                            <a href="#settings" class="hover:opacity-60">Settings</a> <br/>
+                            <a href="#business" class="hover:opacity-60">Business</a> <br/>
+                            <a href="#other" class="hover:opacity-60">Other</a> <br/>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="relative">
+                    <div class="line-inactive"></div>
+                    <div id="general" class="mt-auto flex flex-wrap mb-16">
+                        <p class="break text-3xl font-bold ml-4 mb-8">General</p>
+                        <div class="break flex items-center mb-2">
+                            <div class="h-4 mr-4 line-active"></div>
+                            <p class="font-bold text-xl">What does CalenDR actually do?</p>
+                        </div>
+                        <p class="ml-4">Based on how much information you can share with us, CalenDR will customize a reminder schedule to let you know what vaccinations &amp; screenings you have upcoming for the rest of your life!</p>
+                        <p class="ml-4 mb-8">Simply let CalenDR know some basic questions about yourself, some health history, and let CalenDR calculate all future upcoming screenings &amp; vaccinations forever!</p>
+        
+                        <div class="break flex items-center mb-2">
+                            <div class="h-4 mr-4 line-active"></div>
+                            <p class="font-bold text-xl">Is there a cost to use CalenDR?</p>
+                        </div>
+                        <p class="ml-4">Nope! CalenDR is free for all users, and hopefully accessible to the world soon!</p>
+                        <p class="ml-4 mb-8">If you would like to donate to the website, all proceeds are spent on the operation costs of keeping CalenDR up and running and free for all other users.</p>
+        
+                        <div class="break flex items-center mb-2">
+                            <div class="h-4 mr-4 line-active"></div>
+                            <p class="font-bold text-xl">How does CalenDR function?</p>
+                        </div>
+                        <p class="ml-4">CalenDR will calculate all necessary &amp; vital screenings &amp; vaccinations based on;</p>
+                        <ul class="ml-8 break list-disc">
+                            <li class="ml-8">Your preferences</li>
+                            <li class="ml-8">Your health history</li>
+                            <li class="ml-8">Your age</li>
+                            <li class="ml-8">Other necessary factors</li>
+                        </ul>
+                        <p class="ml-4 mb-8">You then have the choice to select between SMS or email notifications to be sent to you at a timeline of your choice to remind you of any upcoming medical checks you should schedule!</p>
+                        
+                        <div class="break flex items-center mb-2">
+                            <div class="h-4 mr-4 line-active"></div>
+                            <p class="font-bold text-xl">What Timezone does CalenDR use?</p>
+                        </div>
+                        <p class="ml-4 mb-8">For all scheduling, and other time based services, CalenDR uses Easten Standard Time (EST).</p>
+                    </div>
+        
+                    <div id="account" class="mt-auto flex flex-wrap mb-16">
+                        <p class="break text-3xl font-bold ml-4 mb-8">Account</p>
+                        <div class="break flex items-center mb-2">
+                            <div class="h-4 mr-4 line-active"></div>
+                            <p class="font-bold text-xl">Can I sign up multiple people to an account?</p>
+                        </div>
+                        <p class="ml-4 mb-8">For now, CalenDR operates on 1 user per person, but we are working on bringing the ability to register multiple people on a single account. Stay tuned!</p>
+                        <div class="break flex items-center mb-2">
+                            <div class="h-4 mr-4 line-active"></div>
+                            <p class="font-bold text-xl">How do I modify my account information?</p>
+                        </div>
+                        <p class="ml-4">To modify account information, such as name, password, country of residence, etc, all you need to do is sign into the CalenDR website and go to the settings page from the dashboard. Then, simply click on any setting you wish to modify and enter in the new information! </p>
+                        <p class="ml-4 mb-8">Some basic information is not able to be modified, as it would compromise scheduling. If it is required to change these, delete your account and register a new one.</p>
+                        <div class="break flex items-center mb-2">
+                            <div class="h-4 mr-4 line-active"></div>
+                            <p class="font-bold text-xl">How do I delete my account?</p>
+                        </div>
+                        <p class="ml-4 mb-8">After logging into the website and navigating to the settings page from the dashboard, there is a button below all other settings titled "delete account". Click on this button and confirm with your information to permanently delete your account.</p>
+                        <div id="password" class="break flex items-center mb-2">
+                            <div class="h-4 mr-4 line-active"></div>
+                            <p class="font-bold text-xl">Why can't I use this password?</p>
+                        </div>
+                        <p class="ml-4 mb-4">To ensure the security of your account, we require passwords to meet a certain strength criteria. This includes:</p>
+                        <ul class="ml-8 break list-disc mb-4">
+                            <li class="ml-8">Password length between 8-32 characters (including 8 and 32).</li>
+                            <li class="ml-8">Password includes a lowercase letter</li>
+                            <li class="ml-8">Password includes an uppercase letter</li>
+                            <li class="ml-8">Password includes a number</li>
+                            <li class="ml-8">Password includes a special symbol</li>
+                        </ul>
+                        <p class="ml-4 mb-4">If your password meets all the requirements and still does not work, here are some possible reasons:</p>
+                        <ul class="ml-8 break list-disc mb-8">
+                            <li class="ml-8">Password uses spaces</li>
+                            <li class="ml-8">Password includes a special character not in the following list: ! @ # $ % ^ & * ( ) _ - + = [ ] { } | \ : ; " ' < > , . ? /</li>
+                        </ul>
+                    </div>
+        
+                    <div id="privacy" class="mt-auto flex flex-wrap mb-16">
+                        <p class="break text-3xl font-bold ml-4 mb-8">Privacy &#38; Terms</p>
+                        <div class="break flex items-center mb-2">
+                            <div class="h-4 mr-4 line-active"></div>
+                            <p class="font-bold text-xl">Is my account information going to be shared?</p>
+                        </div>
+                        <p class="ml-4 mb-8">Nope! All information you submit to CalenDR for your health needs will be private and secure to the website only. Your information will not be shared to the public.</p>
+                        <div class="break flex items-center mb-2">
+                            <div class="h-4 mr-4 line-active"></div>
+                            <p class="font-bold text-xl">If I delete my account will the information be deleted too?</p>
+                        </div>
+                        <p class="ml-4 mb-8">Yes, after deleting your account all of your information will be deleted from our database as well. </p>
+                    </div>
+        
+                    <div id="services" class="mt-auto flex flex-wrap mb-16">
+                        <p class="break text-3xl font-bold ml-4 mb-8">Services</p>
+                        <div class="break flex items-center mb-2">
+                            <div class="h-4 mr-4 line-active"></div>
+                            <p class="font-bold text-xl">Does CalenDR provide any other services?</p>
+                        </div>
+                        <p class="ml-4 mb-8">For now, CalenDR functions as a reminder tool for specific cancer screenings &amp; vaccinations. We are always looking at more ways to help people with managing their health, stay tuned for future projects!</p>
+        
+                        <div class="break flex items-center mb-2">
+                            <div class="h-4 mr-4 line-active"></div>
+                            <p class="font-bold text-xl">Does CalenDR schedule medical appointments for me?</p>
+                        </div>
+                        <p class="ml-4 mb-8">Unfortunately no! CalenDR does not have the ability to schedule actual appointments and it is ultimately up to the user to schedule these appointments with their family practitioner.</p>
+                    </div>
+        
+                    <div id="dashboard" class="mt-auto flex flex-wrap mb-16">
+                        <p class="break text-3xl font-bold ml-4 mb-8">Dashboard</p>
+                        <div class="break flex items-center mb-2">
+                            <div class="h-4 mr-4 line-active"></div>
+                            <p class="font-bold text-xl">What is the dashboard? </p>
+                        </div>
+                        <p class="ml-4 mb-8">The dashboard is a quick home screen that summarizes all your information, upcoming recommended medical checks, etc.</p>
+                        <div class="break flex items-center mb-2">
+                            <div class="h-4 mr-4 line-active"></div>
+                            <p class="font-bold text-xl">What does it mean if i have no upcoming appointments?</p>
+                        </div>
+                        <p class="ml-4 mb-8">If the dashboard gives you the message of "No upcoming appointments in this time span" or "No upcoming cancer screenings in this time span", it just means that from today to your selected time range, there are no appointments or cancer screenings. For example, if you have selected 6 months these messages would indicate there are no appointments or cancer screenings from now to 6 months from now. To modify your selected time range, go to the top right of your dashboard and click on the dropdown to select from any of the options given to you.</p>
+                        <div class="break flex items-center mb-2">
+                            <div class="h-4 mr-4 line-active"></div>
+                            <p class="font-bold text-xl">What is the appointments tab for?</p>
+                        </div>
+                        <p class="ml-4 mb-8">The appointments tab is for if you want to have a list of specific days for appointments. The user can set the specific day and a day they want to recieve a notification by clicking the add appointments button, and the calendars for each day are for visual representation. All notifications are sent out 12am EST.</p>
+                    </div>
+        
+                    <div id="settings" class="mt-auto flex flex-wrap mb-16">
+                        <p class="break text-3xl font-bold ml-4 mb-8">Settings</p>
+                        <div class="break flex items-center mb-2">
+                            <div class="h-4 mr-4 line-active"></div>
+                            <p class="font-bold text-xl">Why can't I change certain account information?</p>
+                        </div>
+                        <p class="ml-4 mb-8">Certain basic account information such as age or sex are not able to be modified after account creation, simply because they would influence the scheduling process in a way we cannot account for. If it is required to change these, delete your account and register a new one.</p>
+                    </div>
+        
+                    <div id="business" class="mt-auto flex flex-wrap mb-16">
+                        <p class="break text-3xl font-bold ml-4 mb-8">Business</p>
+                        <div class="break flex items-center mb-2">
+                            <div class="h-4 mr-4 line-active"></div>
+                            <p class="font-bold text-xl">How do I contact CalenDR for business inquiries?</p>
+                        </div>
+                        <p class="ml-4 mb-8">To contact for business related topics, contact <a href="[redacted]" class="hover:underline">[redacted]</a></p>
+                    </div>
+
+                    <div id="other" class="mt-auto flex flex-wrap">
+                        <p class="break text-3xl font-bold ml-4 mb-8">Other</p>
+                        <div class="break flex items-center mb-8">
+                            <div class="h-4 mr-4 line-active"></div>
+                            <p class="font-bold text-xl">What do my immunizations/screenings do?</p>
+                        </div>
+                        <p class="font-bold text-xl ml-4 mb-4">Immunizations</p>
+                        <div class="ml-4 mb-4">
+                            <span class="font-bold">DTaP-IPV-Hib:</span>
+                            <span>This vaccine is important to get because it protects against multiple serious diseases, including diphtheria, tetanus, pertussis, polio, haemophilus influenzae type b. <a href="https://www.healthlinkbc.ca/healthlinkbc-files/diphtheria-tetanus-pertussis-hepatitis-b-polio-and-haemophilus-influenzae-type-b" target="_blank" class="text-blue underline">More Info</a></span>
+                        </div>
+                        <div class="ml-4 mb-4">
+                            <span class="font-bold">Pneu-C-13:</span>
+                            <span>This vaccine is important to get because it helps protect against pneumococcal disease &amp; pneumonia. <a href="https://www.hpepublichealth.ca/pneu-c-13-vaccine-prevnar-13-faqs/" target="_blank" class="text-blue underline">More Info</a></span>
+                        </div>
+                        <div class="ml-4 mb-4">
+                            <span class="font-bold">Rot-1:</span>
+                            <span>This vaccine is important to get because it protects against rotavirus, which causes severe vomiting and diarrhea in children. <a href="https://www.simcoemuskokahealth.org/Topics/Immunization/CatchUpKeepUpStayonTrack/factsheets/Rotavirus-(Rot-5)" target="_blank" class="text-blue underline">More Info</a></span>
+                        </div>
+                        <div class="ml-4 mb-4">
+                            <span class="font-bold">Men-C-C:</span>
+                            <span>This vaccine is important to get because it protects against meningococcal disease, which can cause brain damage, hearing loss, and loss of limbs. <a href="https://www.hss.gov.nt.ca/sites/hss/files/men-c-c.pdf" target="_blank" class="text-blue underline">More Info</a></span>
+                        </div>
+                        <div class="ml-4 mb-4">
+                            <span class="font-bold">MMR:</span>
+                            <span>This vaccine is important to get because it protects against multiple serious diseases, including measles, mumps, and rubella. <a href="https://www.cdc.gov/vaccines/hcp/vis/vis-statements/mmr.html#:~:text=MMR%20vaccine%20can%20prevent%20measles,infections%2C%20diarrhea%2C%20and%20pneumonia." target="_blank" class="text-blue underline">More Info</a></span>
+                        </div>
+                        <div class="ml-4 mb-4">
+                            <span class="font-bold">Var:</span>
+                            <span>This vaccine is important to get because it protects against varicella (chickenpox), a highly infectious disease that can cause rashes and severe irritation. <a href="https://www.canada.ca/en/public-health/services/publications/healthy-living/canadian-immunization-guide-part-4-active-vaccines/page-24-varicella-chickenpox-vaccine.html" target="_blank" class="text-blue underline">More Info</a></span>
+                        </div>
+                        <div class="ml-4 mb-4">
+                            <span class="font-bold">MMRV:</span>
+                            <span>This vaccine is important to get because it protects against multiple serious diseases, including measles, mumps, rubella, and varicella. <a href="https://www.cdc.gov/vaccines/hcp/vis/vis-statements/mmrv.html" target="_blank" class="text-blue underline">More Info</a></span>
+                        </div>
+                        <div class="ml-4 mb-4">
+                            <span class="font-bold">Tdap-IPV:</span>
+                            <span>This vaccine is important to get because it protects against 4 serious diseases; tetanus, diphtheria, pertussis, and polio. <a href="https://www.hss.gov.nt.ca/sites/hss/files/men-c-c.pdf" target="_blank" class="text-blue underline">More Info</a></span>
+                        </div>
+                        <div class="ml-4 mb-4">
+                            <span class="font-bold">HB:</span>
+                            <span>This vaccine is important to get because it protects against hepatitis b, a serious disease which can result in liver damage and death. <a href="https://www.canada.ca/en/public-health/services/publications/healthy-living/canadian-immunization-guide-part-4-active-vaccines/page-7-hepatitis-b-vaccine.html" target="_blank" class="text-blue underline">More Info</a></span>
+                        </div>
+                        <div class="ml-4 mb-4">
+                            <span class="font-bold">Men-C-ACYW:</span>
+                            <span>This vaccine is important to get because it protects against invasive meningococcal disease (IMD), which can cause swelling of the lining around the brain and spinal cord, or a serious infection of the blood, potentially resulting in death. <a href="https://www.hpepublichealth.ca/men-c-acyw-135-menactra-faqs/" target="_blank" class="text-blue underline">More Info</a></span>
+                        </div>
+                        <div class="ml-4 mb-4">
+                            <span class="font-bold">HPV-9</span>
+                            <span>This vaccine is important to get because it protects against 9 types of human papillomavirus, which can cause several types of cancer. <a href="https://immunizebc.ca/vaccines/hpv" target="_blank" class="text-blue underline">More Info</a></span>
+                        </div>
+                        <div class="ml-4 mb-4">
+                            <span class="font-bold">Tdap:</span>
+                            <span>This vaccine is important to get because it protects against 3 serious diseases; tetanus, diphtheria, and pertussis. <a href="https://www.cdc.gov/vaccines/hcp/vis/vis-statements/tdap.html" target="_blank" class="text-blue underline">More Info</a></span>
+                        </div>
+                        <div class="ml-4 mb-4">
+                            <span class="font-bold">Td (booster): </span>
+                            <span>This vaccine is important to get because it protects against tetanus, which can cause painful stiffening of the muscles, and diphtheria, which can lead to difficulty breathing, heart failure, paralysis, or death. <a href="https://www.cdc.gov/vaccines/hcp/vis/vis-statements/td.html#:~:text=Td%20is%20usually%20given%20as,addition%20to%20tetanus%20and%20diphtheria." target="_blank" class="text-blue underline">More Info</a></span>
+                        </div>
+                        <div class="ml-4 mb-4">
+                            <span class="font-bold">HZ:</span>
+                            <span>This vaccine is important to get because it protects against herpes zoster (shingles), a painful rash disease. Nearly 1 in 3 Canadians develop herpes zoster in their lifetime. <a href="https://www.canada.ca/en/public-health/services/publications/healthy-living/canadian-immunization-guide-part-4-active-vaccines/page-8-herpes-zoster-(shingles)-vaccine.html" target="_blank" class="text-blue underline">More Info</a></span>
+                        </div>
+                        <div class="ml-4 mb-4">
+                            <span class="font-bold">Pneu-P-23:</span>
+                            <span>This vaccine is important to get because it helps protect against pneumococcal disease &amp; pneumonia. <a href="https://www.hss.gov.nt.ca/sites/hss/files/pneu-p-23_.pdf" target="_blank" class="text-blue underline">More Info</a></span>
+                        </div>
+                        <div class="ml-4 mb-4">
+                            <span class="font-bold">IPV:</span>
+                            <span>This vaccine is important to get because it helps protect against polio. <a href="https://immunizebc.ca/vaccines/polio" target="_blank" class="text-blue underline">More Info</a></span>
+                        </div>
+                        <div class="ml-4 mb-4">
+                            <span class="font-bold">Influenza Shot:</span>
+                            <span>This vaccine protects against the flu. <a href="https://www.canada.ca/en/public-health/services/diseases/flu-influenza/get-your-flu-shot.html" target="_blank" class="text-blue underline">More Info</a></span>
+                        </div>
+                        <a href="https://www.canada.ca/en/public-health/services/immunization/national-advisory-committee-on-immunization-naci.html" target="_blank" class="ml-4 mb-16 text-blue underline font-bold">Guide for all vaccines</a>
+                        <p class="font-bold text-xl ml-4 mb-4 w-screen">Cancer Screenings</p>
+                        <div class="ml-4 mb-4">
+                            <span class="font-bold">Pap test:</span>
+                            <span>Helps diagnose cervical cancer.</span>
+                        </div>
+                        <div class="ml-4 mb-4">
+                            <span class="font-bold">Mammogram:</span>
+                            <span>Helps diagnose breast cancer.</span>
+                        </div>
+                        <div class="ml-4 mb-4">
+                            <span class="font-bold">Fecal immunochemical test:</span>
+                            <span>Helps diagnose colorectal cancer.</span>
+                        </div>
+                        <div class="ml-4 mb-4">
+                            <span class="font-bold">Colonoscopy:</span>
+                            <span>Helps diagnose colorectal cancer.</span>
+                        </div>
+                        <div class="ml-4 mb-4">
+                            <span class="font-bold">Low-dose CT Scan:</span>
+                            <span>Helps diagnose lung cancer.</span>
+                        </div>
+                        <div class="ml-4 mb-4">
+                            <span class="font-bold">PSA test:</span>
+                            <span>Helps diagnose prostate cancer.</span>
+                        </div>  
+                    </div>
+                </div>
+            </div>
+           
+            <div id="nav-card" class="">
+                <div id="nav-card-scroll-container">
+                    <div class="mr-4">
+                        <div class="flex mb-4 items-center">
+                            <p class="text-xl font-bold">Topics</p>
+                            <a href="contact" class="text-blue hover:opacity-60 ml-auto">Contact Support</a>
+                        </div>
+                        <div class="text-blue">
+                            <a href="#general" class="hover:opacity-60">General</a> <br/>
+                            <a href="#account" class="hover:opacity-60">Account</a> <br/>
+                            <a href="#privacy" class="hover:opacity-60">Privacy &amp; Terms</a> <br/>
+                            <a href="#services" class="hover:opacity-60">Services</a> <br/>
+                            <a href="#dashboard" class="hover:opacity-60">Dashboard</a> <br/>
+                            <a href="#settings" class="hover:opacity-60">Settings</a> <br/>
+                            <a href="#business" class="hover:opacity-60">Business</a> <br/>
+                            <a href="#other" class="hover:opacity-60">Other</a> <br/>
+                        </div>
+            
+                        <p class="mt-8 mb-4 text-xl font-bold">Other Information</p>
+                        <div class="text-gray">
+                            <p class="mb-2">CalenDR uses country specific cancer screening guidelines for these countries:</p>
+                            <p class="ml-4 mb-2">• Canada</p>
+                            <p class="mb-4">and will use American guidelines for every other country. Otherwise, immunizations and all other guidelines are based on Canadian government recommendations.</p>
+                            <p>We offer support through email, phone and our <a href="contact" class="text-blue hover:opacity-60">contact page</a>.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="h-screen-third bg-white py-16 flex box-shadow">
+        <div class="w-72-rem mx-auto flex">
+            <div class="w-64 mr-16">
+                <p class="text-3xl font-bold">CalenDR</p> <br/>
+                <p class="">Providing scheduling assistance when it comes to vaccinations &amp; screenings. </p>
+            </div>
+            
+            <div class="ml-auto mr-8">
+                <p class="text-xl font-bold mb-2">Company</p>
+                <a href="/about" class="link">About us</a> <br/>
+                <a href="/contact" class="link">Contact</a> <br/>
+            </div>
+            <div class="mx-8">
+                <p class="text-xl font-bold mb-2">Services</p>
+                <p>Scheduling</p> 
+            </div>
+            <div class="ml-8">
+                <p class="text-xl font-bold mb-2">Resources</p>
+                <a href="/FAQ" class="link">FAQ</a> <br/>
+                <a href="/tos" class="link">Terms of Service</a> <br/>
+                <a href="/signup" class="link">Sign up</a> <br/>
+                <a href="/login" class="link">Login</a> <br/>
+                <a href="/password-reset" class="link">Forgot Password</a> <br/>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

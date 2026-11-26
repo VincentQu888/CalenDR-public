@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Providing scheduling assistance when it comes to vaccinations & screenings">
+    <meta name="keywords" content="CalenDR, immunization schedule, vaccination schedule, flu shot schedule, screening schedule, immunization schedule ontario, vaccination schedule canada, vaccination schedule ontario, immunization schedule canada, cancer screening ontario, cancer screening canada">
+
+    <meta property="og:title" content="CalenDR"/> 
+    <meta property="og:description" content="Providing scheduling assistance when it comes to vaccinations & screenings"/> 
+    <meta property="og:image" content="/imgs/dashboardimg.png" /> 
+    <meta property="og:url" content="[redacted]" />
+
+    <link th:href="@{css/main.css}" rel="stylesheet" /> 
+    <link rel="stylesheet" href="/css/idx.css">
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/shared.css">
+    <script src="/js/index.js" defer></script>
+
+    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@1,900,700,500,301,701,300,501,401,901,400,2&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="/imgs/favicon.svg">
+
+    <title>CalenDR</title>
+</head>
+
+
+<!--html-->
+<body>
+    <script>
+        var alertMessage = "[[${notification}]]";
+        if(alertMessage) {
+            alert(alertMessage);
+        }
+    </script>
+
+    <section id="banner" class="fixed w-fullscreen h-screen-twothird">
+        <img id="banner-img" src="/imgs/banner.png">
+    </section>
+
+    
+    <nav id="nav" class="text-xl font-medium text-white">
+        <a href="/" id="home" class="font-extrabold text-3xl mr-4 ml-auto">CalenDR</a>
+        <a href="/about" id="about">About</a>
+        <a href="/contact" id="contact">Contact</a>
+        <a href="/FAQ" id="faq">Frequently Asked</a>
+        <a href="/login" id="sign-in-button-container" class="mr-auto"><div id="sign-in-button" class="text-xl py-2 px-4"><span th:text="${signUpText}"></span>&#8594;</div></a>
+        
+        <a id="burger-menu" class="hidden" href="#side-navbar">
+            <embed id="burger-menu-icon" src="/imgs/burger-menu.svg"/>
+        </a>
+        <div id="side-navbar">
+            <div class="flex items-center mb-2">
+                <a href="/" class="font-extrabold text-3xl">CalenDR</a>
+                <a href="" class="ml-auto font-bold">&#x2715;</a> 
+            </div>
+            <a href="/about" class="block link">About</a> 
+            <a href="/contact" class="block link">Contact</a> 
+            <a href="/FAQ" class="block link">Frequently Asked</a> 
+            <a href="/tos" class="block link">Terms of Service</a> 
+            <a href="/signup" class="block link">Sign up</a>
+            <a href="/login" id="sign-in-button-container-mobile" class="mr-auto block"><div id="sign-in-button-mobile" class="text-xl py-2 px-4"><span th:text="${signUpText}"></span>&#8594;</div></a>
+        </div>
+
+        <a id="back-to-top-button" href="#nav"><div id="back-to-top-arrow" class=""></div></a>
+    </nav>
+
+    <section id="banner-text" class="text-white z-50">
+        <div class="flex">
+            <div id="banner-text-div" class="mr-32 ml-auto w-40-rem">
+                <div class="overflow-hidden text-8xl font-bold my-auto flex normal-screen">
+                    <span class="title-anim">A&nbsp</span>
+                    <span class="title-anim-2">new&nbsp</span>
+                    <span class="title-anim-3">way</span>
+                </div>
+                <div class="overflow-hidden text-8xl font-bold my-auto flex normal-screen">
+                    <span class="title-anim-4">to&nbsp</span>
+                    <span class="title-anim-5">schedule&nbsp</span>
+                </div>
+                <div class="overflow-hidden text-8xl font-bold my-auto flex normal-screen">
+                    <span class="title-anim-6">appointments&nbsp</span>
+                </div>
+                <br/>
+                <p class="text-2xl ">Ensuring members have up to date reminders to bring awareness to their vaccinations and screenings.</p>
+
+                <a href="/signup"><div id="banner-services-button" class="text-2xl mt-4 font-medium">Sign Up &#8594;</div></a>
+            </div>
+
+            <div id="landing-page-screen-border" class="mr-auto">
+                <div id="landing-page-screen-background-blue"></div>
+                <div id="landing-page-screen-background-blue-filler"></div>
+                <div id="landing-page-screen" class="flex flex-wrap overflow-hidden">
+                    <div class="relative z-50 m-6 w-full">
+                        <div class="flex items-center mb-8">
+                            <p class="text-white" th:text="'Welcome Back, ' + ${name}"></p>
+                        </div>
+
+                        <p class="font-bold text-3xl mb-4 text-white">Overview</p>
+                        <p class="font-bold text-xl text-white mb-4">Upcoming Appointments</p>
+                        <div class="screen-card h-32 p-4 bg-white mb-4">
+                            <div class="flex mb-2">
+                                <p class="font-bold">Appointments</p>
+                                <p class="ml-auto text-gray">See more &#8594;</p>
+                            </div>
+                            <p>1. Influenza Shot</p>
+                            <p>2. Rot-1 - Rotavirus</p>
+                        </div>
+
+                        <div class="screen-card h-32 p-4 bg-white mb-8">
+                            <div class="flex mb-2">
+                                <p class="font-bold">Cancer Screenings</p>
+                                <p class="ml-auto text-gray">See more &#8594;</p>
+                            </div>
+                            <p>1. Fecal Immunochemical Test</p>
+                            <p>2. Mammogram</p>
+                        </div>
+
+                        <p class="font-bold text-xl mb-4">Health Updates</p>
+                        <div class="screen-card p-4 bg-white mb-4">
+                            <div class="flex mb-2">
+                                <p class="font-bold">Statuses</p>
+                                <embed id="phone-info-example" src="/imgs/information-button.svg" class="h-4 w-4 ml-auto"/>
+                                <div id="one-time-info-text" class="font-semibold">
+                                    Hello! Thanks for using CalenDR :&rpar;
+                                </div>
+                            </div>
+
+                            <div class="flex items-center">
+                                <p>Sexually Active</p>
+                                <label class="switch">
+                                    <input type="checkbox" checked>
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                            <div class="flex items-center mb-1">
+                                <p>Smoked for 20+ years</p>
+                                <label class="switch">
+                                    <input type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="landing-page-screen-footer" class="break mt-auto flex items-center">
+                        <div class="mx-auto flex flex-wrap justify-center">
+                            <embed src="/imgs/home-icon.svg" id="landing-page-screen-footer-svg-first" class="svg break"/>
+                            <p class="text-gray">Home</p>
+                        </div>
+
+                        <div class="mx-auto flex flex-wrap justify-center">
+                            <embed src="/imgs/footer-icon-1.svg" id="landing-page-screen-footer-svg-first" class="svg break"/>
+                            <p class="text-blue">Overview</p>
+                        </div>
+
+                        <div class="mx-auto flex flex-wrap justify-center">
+                            <embed src="/imgs/settings-gear-gray.svg" id="landing-page-screen-footer-svg-first" class="svg break"/>
+                            <p class="text-gray">Settings</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+      
+
+    <section id="CalenDR-description" class="bg-white z-10 w-screen py-32">
+        <div id="calendr-function-text-container" class="flex">
+            <div id="calendr-function-text" class="mx-auto">
+                <h1 class="text-3xl font-bold">The <span class="text-gradient">simplest</span> medical scheduling tool for anyone, anywhere.</h1> <br/>
+                <p class="text-xl">Tell your CalenDR which screenings &amp; immunizations you want to keep track of, and it will automatically remind you of upcoming screenings &amp; immunizations for life!</p>
+            </div>
+        </div>
+
+        <div id="calendr-schedule-text" class="flex mt-32 w-screen">
+            <div id="index-list" class="text-3xl font-bold ml-auto mr-32">
+                <div class="line-inactive"></div>
+                <div class="flex">
+                    <div class="h-8 line-active"></div>
+                    <a href="/login" class="list-animation-item ml-4">1. Create a proper schedule</a>
+                </div> <br/>
+                <p class="list-animation-item ml-4">2. Treatment</p> <br/>
+                <p class="list-animation-item ml-4">3. Health</p>
+            </div>
+
+            <div id="treatment-text" class="mr-auto pl-8">
+                <p class="text-3xl font-bold">Treatment begins with a proper schedule</p> <br/>
+                <p class="text-xl">The first step to consistent medical treatment is having a convenient, easy to follow schedule. Following the schedule CalenDR provides is an easy way to ensure you stay up to date on all vaccinations, cancer screenings and flu shots.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="flex py-32 image-section text-white">
+        <div class="mx-auto w-min">
+            <p class="mb-4 text-blue font-bold text-xl">Save time</p>
+            <div id="image-section-title" class="flex justify-center mb-16 w-1/2 z-10 relative">
+                <p class="text-3xl font-bold">With CalenDR, you no longer need to worry about when or what to have scheduled check ups for.</p>
+            </div>
+
+            <embed src="/imgs/large-plus.svg" id="image-section-plus-svg"/>
+            <div id="dashboard-img" class="img mb-32">
+                <img src="/imgs/dashboardimg.png" class="z-10 relative bg-white" alt="Oops, there should be an image here! Sorry about that."/> 
+            </div>
+
+            <div class="flex">
+                <div id="accuracy-text">
+                    <p class="font-bold text-3xl">Accurate, automated knowledge.</p><br/>
+                    <p class="text-xl">CalenDR automates the scheduling process for you to save time from your actual calendar. It follows government health guidelines from your country to ensure utmost accuracy and notifies you during the months of required appointments.</p>
+                </div>
+        
+                <div id="consistency-text" class="ml-auto">
+                    <p class="font-bold text-3xl">Consistency and reliability.</p><br/>
+                    <p class="text-xl">When it comes to your health, there should never be mistakes. For us, your health is our biggest priority. CalenDR remains consistent in our reminder dates and reliable in the dates we recommend for cancer screenings and immunizations.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section id="final-section-container" class="bg-whitesmoke w-screen pt-32 pb-64 flex">
+        <div id="final-section" class="mx-auto flex">
+            <div id="try-calendr-text" class="mr-auto">
+                <p class="font-bold text-3xl mb-8">Try CalenDR Today</p>
+                <p class="text-xl mb-4">Our scheduling services for vaccinations and screenings are instantly ready after <a class="text-blue hover:underline" href="/signup">creating an account</a>. CalenDR will help you with your immunization schedule and make sure you know which vaccinations and cancer screenings tests to get.</p>
+                <p class="text-xl mb-8">Start with CalenDR today and enjoy a future without worry of scheduling.</p>
+                <a href="/signup">
+                    <div id="cta-button" class="mt-4 flex justify-center items-center font-bold h-16 w-48">
+                        <p class="text-white text-xl">Start now &#8594;</p>
+                    </div>
+                </a>
+            </div>
+    
+            <div class="info-card overflow-hidden">
+                <div class="overflow-hidden info-card-img-container">
+                    <img src="/imgs/david.jpg" class="bg-white info-card-img" alt="Oops, there should be an image here! Sorry about that."/>
+                </div>
+                <div class="p-8 info-card-text">
+                    <p class="text-xl font-bold mb-4">About Us</p>
+                    <p class="mb-4">The backstory behind CalenDR, its creators, and the reason why it was founded.</p>
+                    <a href="/about" class="text-blue hover:underline">Our backstory &#8594;</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <section class="h-screen-third bg-white py-16 flex box-shadow">
+        <div class="w-72-rem mx-auto flex">
+            <div class="w-64 mr-16">
+                <p class="text-3xl font-bold">CalenDR</p> <br/>
+                <p class="">Providing scheduling assistance when it comes to vaccinations &amp; screenings. </p>
+            </div>
+            
+            <div class="ml-auto mr-8">
+                <p class="text-xl font-bold mb-2">Company</p>
+                <a href="/about" class="link">About us</a> <br/>
+                <a href="/contact" class="link">Contact</a> <br/>
+            </div>
+            <div class="mx-8">
+                <p class="text-xl font-bold mb-2">Services</p>
+                <p>Scheduling</p> 
+            </div>
+            <div class="ml-8">
+                <p class="text-xl font-bold mb-2">Resources</p>
+                <a href="/FAQ" class="link">FAQ</a> <br/>
+                <a href="/tos" class="link">Terms of Service</a> <br/>
+                <a href="/signup" class="link">Sign up</a> <br/>
+                <a href="/login" class="link">Login</a> <br/>
+                <a href="/password-reset" class="link">Forgot Password</a> <br/>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

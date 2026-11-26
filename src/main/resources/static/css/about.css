@@ -1,0 +1,126 @@
+@media only screen and (max-width: 1200px) {
+    .w-70\.5-rem{
+        margin-left: 2rem;
+        margin-right: 2rem;
+    }
+
+    #about-text-container{
+        width: auto;
+        display: block;
+    }
+
+    body .w-30-rem{
+        width: 100%;
+    }
+
+    #about-list{
+        margin-top: 8rem;
+    }
+
+    #about-cards{
+        width: auto;
+    }
+
+    body .card{
+        height: min-content;
+    }
+}
+
+
+@media only screen and (max-width: 675px) {
+    body #about-cards{
+        display: none;
+    }
+
+    #about-text-container{
+        margin-right: 0;
+    }
+}
+
+
+.card{
+    box-shadow: 0px 0px 20px 5px rgba(57, 81, 94, 0.09);
+    border-radius: 1rem;
+    height: 29.096rem;
+    width: auto;
+    margin-bottom: 2rem;
+}
+
+.line-active{
+    background-color: #1282f3;
+    width: 0.1rem;
+}
+
+.line-inactive{
+    background-color: #e6e6e6;
+    width: 0.1rem;
+    height: 17rem;
+    z-index: -1;
+    position: absolute;
+}
+
+.card-img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+
+
+#banner-text{
+    padding-top: calc(12rem - 5.819rem);
+}
+
+#about-cards{
+    padding-top: calc(12rem - 5.819rem);
+}
+
+#plus-svg{
+    position: absolute;
+    z-index: -1;
+    scale: 200%;
+    opacity: 7.5%;
+    transform: rotate(-10deg) translateX(-3.5rem) translateY(-3.5rem);
+}
+
+#heart-svg{
+    position: absolute;
+    z-index: -1;
+    scale: 40%;
+    opacity: 7.5%;
+    transform: rotate(15deg) translateX(-40rem) translateY(-20rem);
+}
+
+
+
+#david-info-text{
+    display: none;
+    position: absolute;
+    background-color: white;
+    box-shadow: 0px 0px 20px 5px rgba(57, 81, 94, 0.18);
+    border-radius: 0.5rem;
+    color: #031c35;
+    padding: 1rem;
+    margin-right: 2rem;
+    z-index: 50;
+}
+
+#david-info:hover #david-info-text{
+    display: block;
+}
+
+#vincent-info-text{
+    display: none;
+    position: absolute;
+    background-color: white;
+    box-shadow: 0px 0px 20px 5px rgba(57, 81, 94, 0.18);
+    border-radius: 0.5rem;
+    color: #031c35;
+    padding: 1rem;
+    width: min-content;
+    z-index: 50;
+}
+
+#vincent-info:hover #vincent-info-text{
+    display: block;
+}

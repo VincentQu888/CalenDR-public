@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta property="og:title" content="CalenDR"/> 
+    <meta property="og:description" content="Providing scheduling assistance when it comes to vaccinations & screenings"/> 
+    <meta property="og:image" content="/imgs/dashboardimg.png" /> 
+    <meta property="og:url" content="[redacted]" />
+
+    <link th:href="@{/css/main.css}" rel="stylesheet" /> 
+    <link rel="stylesheet" href="/css/dashboard.css">
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/shared.css">
+
+    <script src="js/dashboard.js" defer></script>
+
+    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@1,900,700,500,301,701,300,501,401,901,400,2&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="/imgs/favicon.svg">
+
+    <title>Dashboard</title>
+</head>
+
+
+
+<body class="bg-whitesmoke">
+    <div class="flex">
+        <nav class="font-medium bg-white h-screen flex flex-wrap fixed z-10 text-xl-rem">
+            <div class="break">
+                <a href="/" class="font-extrabold">CalenDR</a> <br/>
+
+                <div class="flex flex-wrap mt-4">
+                    <div class="h-auto mr-4-vw line-active"></div> <a href="/default" class="link-active">Overview</a> <br/>
+
+                    <div class="break flex">
+                        <div class="h-auto mr-4-vw line-inactive"></div> <a href="/dashboard/appointments" class="nav-link">Appointments</a>
+                    </div> 
+
+                    <div class="break flex">
+                        <div class="h-auto mr-4-vw line-inactive"></div> <a href="/dashboard/settings" class="nav-link">Settings</a>
+                    </div> 
+
+                    <div class="break flex">
+                        <div class="h-auto mr-4-vw line-inactive"></div> <a href="/FAQ" class="nav-link">FAQ</a>
+                    </div> 
+
+                    <div class="break flex">
+                        <div class="h-auto mr-4-vw line-inactive"></div> <a href="/contact" class="nav-link">Support</a>
+                    </div> 
+                </div>
+            </div>
+            <div class="mt-auto mb-8 mr-8">
+                <p class="text-gray text-lg font-semibold mb-2">To figure out where you can go for immunizations and cancer screenings, or how you can schedule them, call your family practitioner!</p>
+                <p class="text-lg font-semibold break text-blue">All Time-Based features use Eastern Standard Time.</p>
+            </div>
+        </nav>
+
+        <div id="dashboard" class="mt-8 h-full">
+            <div id="dashboard-nav" class="flex mb-8">
+                <div id="dashboard-nav-text">
+                    <p class="ml-8 text-xl font-semibold text-gray" th:text="${'Welcome back, ' + name}"></p>
+                    <p class="ml-8 text-3xl font-bold mb-4">Overview</p>
+                    <a href="/dashboard/appointments" id="appointment-link-mobile" class="ml-8 nav-link link-active text-xl">Appointments &rarr;</a>
+                </div>
+
+                <form class="ml-auto mr-8 text-xl" method="get" id="info-range-form">
+                    <select class="px-2" name="info-range" id="info-range" onchange="changeInfoRange()">
+                        <option value="1" th:selected="${range.equals('1')}">6 months</option>
+                        <option value="2" th:selected="${range.equals('2')}">1 year</option>
+                        <option value="3" th:selected="${range.equals('3')}">5 years</option>
+                        <option value="4" th:selected="${range.equals('4')}">10 years</option>
+                        <option value="5" th:selected="${range.equals('5')}">All</option>
+                    </select>
+                </form>
+            </div>
+
+
+            <div class="flex mb-8">
+                <div id="upcoming-immunizations-title" class="ml-8 bg-white title">
+                    <embed src="/imgs/calendar.svg" class="svg"/>
+                    <p class="text-3xl font-bold">Upcoming Immunizations</p>
+                </div>
+
+                <div id="cancer-screening-title" class="ml-8 bg-white title">
+                    <embed src="/imgs/calendar.svg" class="svg"/>
+                    <p class="text-3xl font-bold">Upcoming Cancer Screenings</p>
+                </div>
+
+                <div id="upcoming-immunizations-title-mobile" class="ml-8 bg-white title">
+                    <embed src="/imgs/calendar.svg" class="svg"/>
+                    <p class="text-3xl font-bold">Upcoming Appointments</p>
+                </div>
+            </div>
+
+            <div id="margin-bottom-12-container" class="flex mb-12">
+                <div id="upcoming-appointments" class="mx-8 p-6 bg-white text-lg">
+                    <div id="appointments-list">
+                        <div th:if="${scheduleImmunizations}">
+                            <div th:if="${appointments.isEmpty()}">
+                                <p class="text-normal font-bold">Yay!</p>
+                                <p class="text-gray font-semibold">No upcoming immunizations in this time span.</p>
+                            </div>
+                            <div th:unless="${appointments.isEmpty()}">
+                                <ul th:each="key : ${appointmentKeys}" class="mb-8 text-gray font-semibold">
+                                    <span class="text-normal font-bold" th:text="${key} + ':'"></span>
+                                    <li th:each="next : ${appointments.get(key)}">
+                                        <span th:text="${next}"></span>
+                                    </li>
+                                </ul>     
+                            </div> 
+                        </div>
+                        <div th:unless="${scheduleImmunizations}">
+                            <p class="text-gray font-semibold">Immunization scheduling disabled.</p>
+                        </div>             
+                    </div>
+                </div>
+
+                <div id="upcoming-screenings" class="mr-8 p-6 bg-white text-lg">
+                    <div id="screenings-list">
+                        <div th:if="${scheduleCancer}">
+                            <div th:if="${screenings.isEmpty()}">
+                                <p class="text-normal font-bold">Yay!</p>
+                                <p class="text-gray font-semibold">No upcoming cancer screenings in this time span.</p>
+                            </div>
+                            <div th:unless="${screenings.isEmpty()}">
+                                <ul th:each="key : ${screeningKeys}" class="mb-8 text-gray font-semibold">
+                                    <span class="text-normal font-bold" th:text="${key} + ':'"></span>
+                                    <li th:each="next : ${screenings.get(key)}">
+                                        <span th:text="${next}"></span>
+                                    </li>
+                                </ul>     
+                            </div>  
+                        </div>
+                        <div th:unless="${scheduleCancer}">
+                            <p class="text-gray font-semibold">Cancer screening scheduling disabled.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="flex mb-8">
+                <div id="dashboard-appointments-title" class="ml-8 bg-white title">
+                    <embed src="/imgs/health-update.svg" class="svg"/>
+                    <p class="text-3xl font-bold">Self-Scheduled Appointments</p>
+                </div>
+                <div id="one-time-title" class="ml-8 bg-white title">
+                    <embed src="/imgs/health-update.svg" class="svg"/>
+                    <p class="text-3xl font-bold">One-time Tests Missed</p>
+                </div>
+            </div>
+        
+            <div id="dashboard-appointments-mobile" class="ml-8 bg-white title">
+                <p class="text-3xl font-bold">Self-Scheduled Appointments</p>
+            </div>
+            <div class="flex">
+                <div id="dashboard-appointments" class="ml-8 p-6 bg-white text-lg">
+                    <div id="appointment-appointments-list">
+                        <p class="text-gray font-semibold" th:if="${appointmentAppointmentKeys.isEmpty()}">Custom appoinmtent list empty!</p>
+                        <div th:each="key, iterStat : ${appointmentAppointmentKeys}">
+                            <p th:text="${appointmentKeyDates[__${iterStat.index}__]}" class="font-bold"></p>
+                            <div th:each="next, j : ${appointmentAppointments.get(key)}">
+                                <span class="text-gray font-semibold" th:text="${j.index+1} + '. ' + ${next}"></span> 
+                            </div>
+                            <br/>
+                        </div>         
+                    </div>
+                </div>
+
+                <div id="one-time-title-mobile" class="ml-8 bg-white title">
+                    <p class="text-3xl font-bold">One-time Tests Missed</p>
+                </div>
+                <div id="missed-appointments" class="p-6 ml-8 bg-white flex flex-wrap text-lg">
+                    <div th:if="${missed.isEmpty()}" class="font-bold mb-2 break">
+                        <p>Yay!</p>
+                        <p class="text-gray">No one-time appointments/screenings missed</p>
+                    </div>
+                    <form th:unless="${missed.isEmpty()}" th:each="next, iterStat : ${missed}" class="flex items-center break" id="missed-item" method="post">
+                        <span th:text="${iterStat.index + 1} + '. ' + ${next}" class="font-bold" id="remove-id" name="remove-id"></span> 
+                        <button class="font-bold ml-2 x-button" onclick="remove()">✖</button>
+                        <input type="hidden" id="missed-appointment-input" name="missedAppointment"/>
+                    </form>
+                    <form class="flex items-center break mt-auto" id="reset-form" name="reset-form" th:action="@{/reset}" method="post">
+                        <button class="text-blue">Reset</button>
+                        <div id="one-time-info" class="text-blue ml-auto">
+                            <div class="flex items-center">
+                                <p class="mr-2">More Info</p>
+                                <embed src="/imgs/information-button.svg" class="h-4 w-4"/>
+                            </div>
+                            <div id="one-time-info-text" class="font-semibold">
+                                There are certain tests, screenings or appointments that only occur at one age. We list out each one you may have possibly missed, just in case.
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div id="mobile-scheduling-recommendation" class="mt-8 mb-8 ml-8 font-semibold">
+                <p class="text-gray text-lg">To figure out where you can go for immunizations and cancer screenings, or how you can schedule them, call your family practitioner!</p>
+                <p class="text-lg font-semibold break text-blue">All Time-Based features use Eastern Standard Time.</p>
+            </div>
+
+            <div id="footer">
+                &#169; <a href="/" class="mr-4 link">CalenDR</a>&#x2022;<a href="/tos" class="ml-4 link mr-8">Terms of Service</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="mobile-dashboard-nav" class="break mt-auto flex items-center">
+        <a href="/" class="mx-auto flex flex-wrap justify-center">
+            <embed src="/imgs/home-icon.svg"/>
+            <p class="text-gray">Home</p>
+        </a>
+
+        <a href="/default" class="mx-auto flex flex-wrap justify-center">
+            <embed src="/imgs/footer-icon-1.svg"/>
+            <p class="text-blue">Overview</p>
+        </a>
+
+        <a href="/dashboard/settings" class="mx-auto flex flex-wrap justify-center">
+            <embed src="/imgs/settings-gear-gray.svg"/>
+            <p class="text-gray">Settings</p>
+        </a>
+    </div>
+</body>
+</html>

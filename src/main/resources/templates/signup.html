@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta property="og:title" content="CalenDR"/> 
+    <meta property="og:description" content="Providing scheduling assistance when it comes to vaccinations & screenings"/> 
+    <meta property="og:image" content="/imgs/dashboardimg.png" /> 
+    <meta property="og:url" content="[redacted]" />
+
+    <link th:href="@{/css/main.css}" rel="stylesheet" /> 
+    <link rel="stylesheet" href="/css/signup.css">
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/shared.css">
+
+    <script src="/js/signup.js" defer></script>
+
+    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@1,900,700,500,301,701,300,501,401,901,400,2&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="/imgs/favicon.svg">
+
+    <title>Sign Up</title>
+</head>
+
+
+
+<body class="w-screen">
+    <nav class="flex text-2xl font-medium pb-8 pt-16 mx-8">
+        <div class="mx-auto w-36-rem">
+            <a href="/" id="home" class="font-extrabold text-3xl mr-auto">CalenDR</a>
+        </div>
+    </nav>
+
+    <div id="login-card-container" class="flex mb-4">
+        <div id="login-card" class="mx-auto p-8 bg-white">
+            <p class="text-2xl font-bold mb-8">Sign up</p>
+            
+            <form id="form-container" method="post">
+                <div class="flex items-center mb-8">
+                    <span class="mr-4">Email</span>
+                    <input type="email" name="email-form" id="email-form" class="h-12 px-4 form">
+                </div>
+
+                <div class="flex items-center mb-2">
+                    <span class="mr-4">Phone Number</span>
+                    <input type="tel" name="phone-form" id="phone-form" class="h-12 px-4 form" pattern="[0-9]{3}[0-9]{3}[0-9]{4}" required>
+                </div>
+                <div class="mb-8 w-form">
+                    <div id="phone-info" class="flex items-center" ontouchstart="this.classList.add('hover');">
+                        <embed src="/imgs/information-button.svg" class="h-4 w-4 mr-2"/>
+                        <p class="text-blue">More Info</p>
+                    </div>
+                    <div id="phone-info-text">
+                        <p>Phone number must ONLY contain numbers.</p>
+                        <p>For example, the phone number [redacted]</p>
+                        <p>would be entered in as: [redacted]</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center">
+                    <span class="mr-4">Password</span>
+                    <div class="mb-2 relative w-full">
+                        <input type="password" name="password-form" id="password-form" class="h-12 px-4 form"> 
+                        <img src="/imgs/eye-show.svg" id="toggle-show" alt="Toggle Visibility"/>
+                    </div>
+                </div>
+                <p id="insecure-password" class="w-form text-red hidden">
+                    Password must be between 8-32 characters long, include a lowercase letter, an uppercase letter, a number, and a special symbol. 
+                    <a href="/FAQ#password" target="_blank" class="underline text-blue">More Info</a>
+                </p>
+
+                <div class="flex items-center mt-8">
+                    <span class="mr-4">Confirm Password</span>
+                    <div class="mb-2 relative w-full">
+                        <input type="password" name="password-confirm-form" id="password-confirm-form" class="h-12 px-4 form"> 
+                        <img src="/imgs/eye-show.svg" id="toggle-show-confirm" alt="Toggle Visibility"/>
+                    </div>
+                </div>
+                <p id="match-password" class="w-form text-red hidden">Passwords do not match.</p>
+
+                <div class="flex items-center my-8">
+                    <span class="mr-4">Full Name</span>
+                    <input type="text" name="name-form" id="name-form" class="h-12 px-4 form">
+                </div>
+
+                <div class="flex items-center mb-8">
+                    <span class="mr-4">Sex</span>
+                    <select name="sex-form" id="sex-form" class="h-12 px-4 form">
+                        <option value="0">Male</option>
+                        <option value="1">Female</option>
+                    </select>
+                </div>
+
+                <div class="flex items-center mb-8">
+                    <span class="mr-4">Date of Birth</span>
+                    <input type="date" name="age-form" id="age-form" class="h-12 px-4 form" max="" min="1920-01-01">
+                </div>
+                <div class="mb-8 hidden" id="parent-approval-check-box-container">
+                    <p class="mr-2">Parent or guardian approves</p>
+                    <input type="checkbox" id="parent-approval-check-box" name="parent-approval-check-box" class="my-auto">
+                </div>
+
+                <div class="flex items-center mb-2">
+                    <span class="mr-4">Country of Residence</span>
+                    <select name="country-form" id="country-form" class="h-12 px-4 form">
+                        <option value="Canada">Canada</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="mb-8 w-form">
+                    <div id="country-info" class="flex items-center" ontouchstart="this.classList.add('hover');">
+                        <embed src="/imgs/information-button.svg" class="h-4 w-4 mr-2"/>
+                        <p class="text-blue">More Info</p>
+                    </div>
+                    <div id="country-info-text">
+                        <p>CalenDR uses country specific cancer screening guidelines for these countries:</p>
+                        <p class="ml-4">• Canada</p>
+                        <p>and will use American guidelines for every other country. Otherwise, immunizations and all other guidelines are</p>
+                        <p>based on Canadian government recommendations.</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center mb-2">
+                    <span class="mr-4">Immunization Progress</span>
+                    <select name="immunization-progress-form" id="immunization-progress-form" class="h-12 px-4 form">
+                        <option value="0">Early</option>
+                        <option value="1">Slightly Behind</option>
+                        <option value="2">Behind</option>
+                        <option value="3">Very Late</option>
+                    </select>
+                </div>
+                <div class="w-form">
+                    <div id="immunization-progress-info" class="flex items-center mt-2" ontouchstart="this.classList.add('hover');">
+                        <embed src="/imgs/information-button.svg" class="h-4 w-4 mr-2"/>
+                        <p class="text-blue">More Info</p>
+                    </div>
+                    <div id="immunization-progress-info-text">
+                        <p><span class="font-semibold">Early:</span> Started/starting immunizations at infancy</p>
+                        <p><span class="font-semibold">Slightly Behind:</span> Starting immunizations between 1-6 years old</p>
+                        <p><span class="font-semibold">Behind:</span> Starting immunizations between 7-17 years old</p>
+                        <p><span class="font-semibold">Very Late:</span> Starting immunizations at 18 or older</p>
+                    </div>
+                </div>
+
+                <div id="previous-form-container" class="items-center mt-8 mb-2 hidden">
+                    <span class="mr-4">Number of previous immunization visits</span>
+                    <select name="previous-form" id="previous-form" class="h-12 px-4 form">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                </div>
+
+                <div id="last-visit-form-container" class="items-center mt-8 mb-2 hidden">
+                    <span class="mr-4">Date of most recent immunization visit</span>
+                    <input type="date" name="last-visit-form" id="last-visit-form" class="h-12 px-4 form" max="" min="1920-01-01">
+                </div>
+
+
+                <p class="font-bold mt-12 mb-2">CalenDR Will Schedule:</p>
+                <div class="flex mb-1 check-box-section">
+                    <div class="flex items-center check-box-section-item">
+                        <span class="mr-2">Immunizations</span>
+                        <label class="switch mr-8">
+                            <input type="checkbox" id="immunization-schedule-check-box" name="immunization-schedule-check-box" checked>
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+
+                    <div class="flex items-center check-box-section-item">
+                        <span class="mr-2">Cancer Screenings</span>
+                        <label class="switch mr-8">
+                            <input type="checkbox" id="cancer-schedule-check-box" name="cancer-schedule-check-box" checked>
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="flex items-center check-box-section-item">
+                    <span class="mr-2">Influenza Shots</span>
+                    <label class="switch">
+                        <input type="checkbox" id="influenza-schedule-check-box" name="influenza-schedule-check-box" checked>
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+
+                <div class="mb-8 w-form">
+                    <div id="schedule-info" class="flex items-center mt-2" ontouchstart="this.classList.add('hover');">
+                        <embed src="/imgs/information-button.svg" class="h-4 w-4 mr-2"/>
+                        <p class="text-blue">More Info</p>
+                    </div>
+                    <div id="schedule-info-text">
+                        <p class="mb-2">If these options are disabled CalenDR will not show them on your dashboard nor send you notifications for them.</p>
+                        <p><span class="font-semibold">Immunizations:</span> CalenDR will notify you on the month of recommended vaccination dates</p>
+                        <p><span class="font-semibold">Cancer Screenings:</span> CalenDR will notify you on the month of recommended cancer screening dates</p>
+                        <p class="mb-4"><span class="font-semibold">Influenza Shots:</span> CalenDR will notify you on the month of recommended flu shot dates</p>
+                        <p>CalenDR uses country specific cancer screening guidelines for these countries:</p>
+                        <p class="ml-4">• Canada</p>
+                        <p>and will use American guidelines for every other country. Otherwise, immunizations and all other guidelines are</p>
+                        <p>based on Canadian government recommendations.</p>
+                    </div>
+                </div>
+
+
+                <p class="font-bold mb-2">Family Risk Of:</p>
+                <div class="flex mb-8 check-box-section">
+                    <div class="flex items-center check-box-section-item">
+                        <span class="mr-2">Breast Cancer</span>
+                        <label class="switch mr-8">
+                            <input type="checkbox" id="breast-cancer-check-box" name="breast-cancer-check-box">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+
+                    <div class="flex items-center check-box-section-item">
+                        <span class="mr-2">Lung Cancer</span>
+                        <label class="switch mr-8">
+                            <input type="checkbox" id="lung-cancer-check-box" name="lung-cancer-check-box">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+
+                    <div class="flex items-center check-box-section-item">
+                        <span class="mr-2">Prostate Cancer</span>
+                        <label class="switch">
+                            <input type="checkbox" id="prostate-cancer-check-box" name="prostate-cancer-check-box">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <p class="font-bold mb-2">Are You:</p>
+                <div class="flex mb-4 check-box-section">
+                    <div class="flex items-center check-box-section-item">
+                        <span class="mr-2">Sexually Active</span>
+                        <label class="switch mr-8">
+                            <input type="checkbox" id="sexually-active-check-box" name="sexually-active-check-box">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+
+                    <div class="flex items-center check-box-section-item">
+                        <span class="mr-2">Smoking for 20+ years</span>
+                        <label class="switch">
+                            <input type="checkbox" id="smoking-check-box" name="smoking-check-box">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="items-center mb-4 hidden" id="sexually-active-form">
+                    <span class="mr-4">Sexually Active Age</span>
+                    <input type="number" name="sexually-active-age-input" id="sexually-active-age-input" class="h-12 px-4 form" min="0" max="100" placeholder="Age at which you were first sexually active">
+                </div>
+                
+                <div class="items-center hidden" id="smoking-form">
+                    <span class="mr-4">Years Smoking</span>
+                    <input type="number" name="smoking-input" id="smoking-input" class="h-12 px-4 form" min="0" max="100">
+                </div>
+
+                <div class="flex items-center mb-8 mt-8">
+                    <span class="mr-4">Notification Preference</span>
+                    <select name="notification-form" id="notification-form" class="h-12 px-4 form">
+                        <option value="0">Email</option>
+                        <option value="1" disabled>Text/SMS (Work in progress, sorry!)</option>
+                        <option value="2" disabled>Both (Work in progress, sorry!)</option>
+                    </select>
+                </div>
+
+                <div class="mb-2 flex">
+                    <p class="mr-2">I have read, understood, and agreed to the <a class="text-blue link" href="/tos" target="_blank">Terms of Service</a></p>
+                    <input type="checkbox" id="tos-check-box" name="tos-check-box" class="my-auto">
+                </div>
+                <div class="mb-6 flex items-center">
+                    <p class="mr-2">Stay up to date with CalenDR Updates</p>
+                    <input type="checkbox" id="email-list-check-box" name="email-list-check-box" class="my-auto">
+                </div>
+
+                <!-- Hidden for public source release: anti-bot field. -->
+        
+                <div>
+                    <button type="submit" onclick="signup()" class="cursor-pointer break">
+                        <div id="sign-in-confirm" class="flex h-12 font-bold mt-4">
+                            <p class="m-auto text-white">Sign Up →</p>
+                        </div>
+                    </button>
+                </div>
+                <div class="mt-4">
+                    <span class="font-bold">Already have an account?</span> <a href="/login" class="font-bold text-blue link">Sign in</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="flex flex-wrap mx-8">
+        <div class="flex mx-auto w-card mb-8">
+            <div id="signup-footer" class="mr-auto">
+                <a href="/" class="mr-4 link">© CalenDR</a>•<a href="/tos" class="ml-4 link">Terms of Service</a>
+            </div>
+            <div>
+                <span>Why do we need this info?</span>
+                <a href="/FAQ" class="link text-blue">Learn More</a>
+            </div>
+        </div>
+    </div>
+    <p id="disclaimer" class="mx-auto w-card mb-32"><span class="font-bold text-blue">Disclaimer:</span> CalenDR assumes you have been following/will follow the recommended scheduling before signing up and have inputted accurate information.</p>
+
+
+    <!--footer-->
+    <section class="h-screen-third bg-white py-16 flex box-shadow">
+        <div class="w-72-rem mx-auto flex">
+            <div class="w-64 mr-16">
+                <p class="text-3xl font-bold">CalenDR</p> <br/>
+                <p class="">Providing scheduling assistance when it comes to vaccinations &amp; screenings. </p>
+            </div>
+            
+            <div class="ml-auto mr-8">
+                <p class="text-xl font-bold mb-2">Company</p>
+                <a href="/about" class="link">About us</a> <br/>
+                <a href="/contact" class="link">Contact</a> <br/>
+            </div>
+            <div class="mx-8">
+                <p class="text-xl font-bold mb-2">Services</p>
+                <p>Scheduling</p> 
+            </div>
+            <div class="ml-8">
+                <p class="text-xl font-bold mb-2">Resources</p>
+                <a href="/FAQ" class="link">FAQ</a> <br/>
+                <a href="/tos" class="link">Terms of Service</a> <br/>
+                <a href="/signup" class="link">Sign up</a> <br/>
+                <a href="/login" class="link">Login</a> <br/>
+                <a href="/password-reset" class="link">Forgot Password</a> <br/>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

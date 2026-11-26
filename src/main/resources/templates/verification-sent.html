@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link th:href="@{/css/main.css}" rel="stylesheet" /> 
+    <link rel="stylesheet" href="/css/404.css">
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/shared.css">
+
+    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@1,900,700,500,301,701,300,501,401,901,400,2&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="/imgs/favicon.svg">
+
+    <title>Verification Sent!</title>
+</head>
+
+
+<!--html-->
+<body>
+    <nav id="nav" class="text-xl font-medium">
+        <a href="/" id="home" class="font-extrabold text-3xl mr-4 ml-auto">CalenDR</a>
+        <a href="/about" id="about" class="hover:opacity-60">About</a>
+        <a href="/contact" id="contact" class="hover:opacity-60">Contact</a>
+        <a href="/FAQ" id="faq" class="hover:opacity-60">Frequently Asked</a>
+        <a href="/login" id="sign-in-button-container" class="mr-auto"><div id="sign-in-button-alt" class="text-xl py-2 px-4 text-white">Sign in &rarr;</div></a>
+        
+        <a id="burger-menu" class="hidden" href="#side-navbar">
+            <embed id="burger-menu-icon" src="/imgs/burger-menu-black.svg"/>
+        </a>
+        <div id="side-navbar">
+            <div class="flex items-center mb-2">
+                <a href="/" class="font-extrabold text-3xl">CalenDR</a>
+                <a href="" class="ml-auto font-bold">&#x2715;</a> 
+            </div>
+            <a href="/about" class="block link">About</a> 
+            <a href="/contact" class="block link">Contact</a> 
+            <a href="/FAQ" class="block link">Frequently Asked</a> 
+            <a href="/tos" class="block link">Terms of Service</a> 
+            <a href="/signup" class="block link">Sign up</a>
+            <a href="/login" id="sign-in-button-container-mobile" class="mr-auto block"><div id="sign-in-button-mobile" class="text-xl py-2 px-4">Sign in &rarr;</div></a>
+        </div>
+
+        <a id="back-to-top-button" href="#nav"><div id="back-to-top-arrow" class=""></div></a>
+    </nav>
+
+    <section class="pb-32 flex">
+        <div class="w-70.5-rem mx-auto flex">
+            <div class="w-1/2 mr-16">
+                <div id="banner-text" class="mb-16">
+                    <p class="text-xl text-blue font-bold mb-2">Account Verification</p>
+                    <p class="text-6xl font-bold">Your Email Verification for Sign Up was Sent!</p>
+                </div>
+                <div class="text-xl">
+                    <p class="mb-8">Check the email you signed up with for the verification email. Click on the verification link to verify your account!</p>
+                    <p class="mb-4">You'll be on your way to easy medical scheduling soon!</p>
+                    <a href="/" class="text-blue hover:underline">Return to landing page &rarr;</a> <br/>
+                    <a href="/login" class="text-blue hover:underline">Sign in &rarr;</a>
+                </div>
+            </div>
+            <div id="image-section" class="w-1/2 ml-auto">
+                <img src="/imgs/dashboardimg.png" class="img" alt="Oops, there should be an image here!"/>
+            </div>
+        </div>
+    </section>
+
+    <section class="h-screen-third bg-white py-16 flex box-shadow">
+        <div class="w-72-rem mx-auto flex">
+            <div class="w-64 mr-16">
+                <p class="text-3xl font-bold">CalenDR</p> <br/>
+                <p class="">Providing scheduling assistance when it comes to vaccinations &amp; screenings. </p>
+            </div>
+            
+            <div class="ml-auto mr-8">
+                <p class="text-xl font-bold mb-2">Company</p>
+                <a href="/about" class="link">About us</a> <br/>
+                <a href="/contact" class="link">Contact</a> <br/>
+            </div>
+            <div class="mx-8">
+                <p class="text-xl font-bold mb-2">Services</p>
+                <p>Scheduling</p> 
+            </div>
+            <div class="ml-8">
+                <p class="text-xl font-bold mb-2">Resources</p>
+                <a href="/FAQ" class="link">FAQ</a> <br/>
+                <a href="/tos" class="link">Terms of Service</a> <br/>
+                <a href="/signup" class="link">Sign up</a> <br/>
+                <a href="/login" class="link">Login</a> <br/>
+                <a href="/password-reset" class="link">Forgot Password</a> <br/>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

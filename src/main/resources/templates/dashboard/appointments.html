@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta property="og:title" content="CalenDR"/> 
+    <meta property="og:description" content="Providing scheduling assistance when it comes to vaccinations & screenings"/> 
+    <meta property="og:image" content="/imgs/dashboardimg.png" /> 
+    <meta property="og:url" content="[redacted]" />
+
+    <link th:href="@{/css/main.css}" rel="stylesheet" /> 
+    <link rel="stylesheet" href="/css/appointments.css">
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/shared.css">
+
+    <script src="/js/appointments.js" defer></script>
+
+    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@1,900,700,500,301,701,300,501,401,901,400,2&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="/imgs/favicon.svg">
+
+    <title>Appointment List</title>
+</head>
+
+
+
+<body class="bg-whitesmoke">
+    <script>
+        var alertMessage = "[[${notification}]]";
+        if(alertMessage) {
+            alert(alertMessage);
+        }
+    </script>
+
+    <div class="flex">
+        <form id="add-appointment-card" name="add-appointment-card" class="bg-white fixed p-4 appointments-card" method="post">
+            <button id="add-appointment-cancel" class="text-gray mr-auto" onclick="hideAdd()">&larr; Back</button>
+            <p class="font-bold mb-2 text-xl">Add Appointment</p>
+
+            <select name="add-appointment-type" id="add-appointment-type" class="h-12 px-4 w-48 form mb-4">
+                <option value="immunization">Immunization</option>
+                <option value="cancer">Cancer Screening</option>
+                <option value="influenza">Influenza Shot</option>
+                <option value="custom">Custom</option>
+            </select>
+
+            <select name="immunization-type" id="immunization-type" class="h-12 px-4 w-48 form mb-4">
+                <option value="DTaP-IPV-Hib">DTaP-IPV-Hib</option>
+                <option value="Pneu-C-13">Pneu-C-13</option>
+                <option value="Men-C-C">Men-C-C</option>
+                <option value="MMR">MMR</option>
+                <option value="Var">Var</option>
+                <option value="MMRV">MMRV</option>
+                <option value="Tdap-IPV">Tdap-IPV</option>
+                <option value="HB">HB</option>
+                <option value="Men-C-ACYW">Men-C-ACYW</option>
+                <option value="HPV-9">HPV-9</option>
+                <option value="Tdap">Tdap</option>
+                <option value="Td (booster)">Td (booster)</option>
+                <option value="HZ">HZ</option>
+                <option value="Pneu-P-23">Pneu-P-23</option>
+            </select>
+
+            <select name="cancer-type" id="cancer-type" class="h-12 px-4 w-48 form mb-4">
+                <option value="Pap Test">Pap Test</option>
+                <option value="Mammogram">Mammogram</option>
+                <option value="Fecal Immunochemical Test">Fecal Immunochemical Test</option>
+                <option value="Colonoscopy">Colonoscopy</option>
+                <option value="Low-dose CT Scan">Low-dose CT Scan</option>
+                <option value="PSA Test">PSA Test</option>
+            </select>
+
+            <input name="custom-title" id="custom-title" class="h-12 px-4 w-48 form mb-4" type="text" placeholder="Info (64 letters or less)">
+            <input name="date-picker" id="date-picker" class="h-12 px-4 w-48 form mb-4" type="date" max="" min="">
+                
+            <div class="mb-4">
+                <p class="text-gray font-semibold">Notify me on:</p>
+                <input name="notify-date" id="notify-date" class="h-12 px-4 w-48 form" type="date" max="" min="">
+            </div>
+
+            <div class="flex w-full items-center">
+                <div class="ml-auto">
+                    <button id="add-appointment-save" type="button" onclick="addConfirm()" class="cursor-pointer break">
+                        <div class="flex h-12 font-bold save-confirm">
+                            <p class="m-auto text-white">Confirm</p>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        
+            <input class="hidden" id="delete-input-info" name="input-info">
+        </form>
+
+
+        <form id="edit-appointment-card" name="edit-appointment-card" class="bg-white fixed p-4 appointments-card" method="post">
+            <button id="add-appointment-cancel" class="text-gray mr-auto" onclick="hideEdit()">&larr; Back</button>
+            <p class="font-bold mb-2 text-xl">Edit Appointment</p>
+
+            <select name="edit-appointment-type" id="edit-appointment-type" class="h-12 px-4 w-48 form mb-4">
+                <option value="immunization">Immunization</option>
+                <option value="cancer">Cancer Screening</option>
+                <option value="influenza">Influenza Shot</option>
+                <option value="custom">Custom</option>
+            </select>
+
+            <select name="edit-immunization-type" id="edit-immunization-type" class="h-12 px-4 w-48 form mb-4">
+                <option value="DTaP-IPV-Hib">DTaP-IPV-Hib</option>
+                <option value="Pneu-C-13">Pneu-C-13</option>
+                <option value="Men-C-C">Men-C-C</option>
+                <option value="MMR">MMR</option>
+                <option value="Var">Var</option>
+                <option value="MMRV">MMRV</option>
+                <option value="Tdap-IPV">Tdap-IPV</option>
+                <option value="HB">HB</option>
+                <option value="Men-C-ACYW">Men-C-ACYW</option>
+                <option value="HPV-9">HPV-9</option>
+                <option value="Tdap">Tdap</option>
+                <option value="Td (booster)">Td (booster)</option>
+                <option value="HZ">HZ</option>
+                <option value="Pneu-P-23">Pneu-P-23</option>
+            </select>
+
+            <select name="edit-cancer-type" id="edit-cancer-type" class="h-12 px-4 w-48 form mb-4">
+                <option value="Pap Test">Pap Test</option>
+                <option value="Mammogram">Mammogram</option>
+                <option value="Fecal Immunochemical Test">Fecal Immunochemical Test</option>
+                <option value="Colonoscopy">Colonoscopy</option>
+                <option value="Low-dose CT Scan">Low-dose CT Scan</option>
+                <option value="PSA Test">PSA Test</option>
+            </select>
+
+            <input name="edit-custom-title" id="edit-custom-title" class="h-12 px-4 w-48 form mb-4" type="text" placeholder="Info (64 letters or less)">
+            <input name="edit-date-picker" id="edit-date-picker" class="h-12 px-4 w-48 form mb-4" type="date" max="" min="">
+            <input name="edit-info-date" id="edit-info-date" class="hidden" type="text">
+            <input name="edit-info-index" id="edit-info-index" class="hidden" type="text">
+
+            <div class="mb-4">
+                <p class="text-gray font-semibold">Notify me on:</p>
+                <input name="edit-notify-date" id="edit-notify-date" class="h-12 px-4 w-48 form" type="date" max="" min="">
+            </div>
+                
+
+            <div class="flex w-full items-center">
+                <button class="font-bold text-red" type="button" onclick="deleteAppointment()">Delete</button>
+                <div class="ml-auto">
+                    <button id="edit-appointment-save" type="button" onclick="editConfirm()" class="cursor-pointer break">
+                        <div class="flex h-12 font-bold save-confirm">
+                            <p class="m-auto text-white">Confirm</p>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        
+            <input class="hidden" id="delete-input-info" name="input-info">
+        </form>
+
+        <div id="darkened-overlay"></div>
+
+
+
+        <nav class="font-medium bg-white h-screen flex flex-wrap fixed z-10 text-xl-rem">
+            <div class="break">
+                <a href="/" class="font-extrabold">CalenDR</a> <br/>
+
+                <div class="flex flex-wrap mt-4">
+                    <div class="h-auto mr-4-vw line-inactive"></div> <a href="/default" class="nav-link">Overview</a> <br/>
+
+                    <div class="break flex">
+                        <div class="h-auto mr-4-vw line-active"></div> <a href="/dashboard/appointments" class="link-active">Appointments</a>
+                    </div> 
+
+                    <div class="break flex">
+                        <div class="h-auto mr-4-vw line-inactive"></div> <a href="/dashboard/settings" class="nav-link">Settings</a>
+                    </div> 
+
+                    <div class="break flex">
+                        <div class="h-auto mr-4-vw line-inactive"></div> <a href="/FAQ" class="nav-link">FAQ</a>
+                    </div> 
+                    
+                    <div class="break flex">
+                        <div class="h-auto mr-4-vw line-inactive"></div> <a href="/contact" class="nav-link">Support</a>
+                    </div> 
+                </div>
+            </div>
+            <div class="mt-auto mb-8 mr-8">
+                <p class="text-gray text-lg font-semibold mb-2">To figure out where you can go for immunizations and cancer screenings, or how you can schedule them, call your family practitioner!</p>
+                <p class="text-lg font-semibold break text-blue">All Time-Based features use Eastern Standard Time.</p>
+            </div>
+        </nav>
+
+        <div id="appointments" class="mt-8">
+            <div class="flex flex-wrap items-center mb-8">
+                <p class="ml-8 mb-2 text-3xl font-bold">Add an Appointment</p>
+                <p class="ml-8 text-xl break text-blue">Adding an appointment will notify you at 12am EST on the chosen day, but will not actually schedule a doctor's appointment for you.</p>
+            </div>
+
+            <div id="appointment-list-container" class="flex text-lg">
+                <div id="appointment-list" class="ml-8 mb-8 p-6">
+                    <p class="text-xl font-bold mb-8">Appointment List</p>
+                    <div th:each="key, iterStat : ${appointmentKeys}">
+                        <input type="date" th:value="${appointmentKeyDates[__${iterStat.index}__]}" class="font-bold"/>
+                        <div th:each="next, j : ${appointments.get(key)}">
+                            <span th:text="${j.index+1} + '. ' + ${next.appointment}"></span> 
+                            <button 
+                            th:data-type="${next.appointment}" 
+                            th:data-date="${appointmentKeyDates[__${iterStat.index}__]}" 
+                            th:data-index="${j.index}"
+                            th:data-noti-date="${notificationDates[next.index]}"
+                            th:onclick="editAppointment(this.getAttribute('data-type'), this.getAttribute('data-date'), this.getAttribute('data-index'), this.getAttribute('data-noti-date'))"
+                            class="text-blue ml-2">edit</button>
+                        </div>
+                        <br/>
+                    </div>
+                    
+                    <div id="add-appointment-button-container" class="flex">
+                        <button onclick="addAppointment()" class="flex items-center">
+                            <p class="font-semibold text-gray">Add new appointment</p>
+                            <embed class="plus-button ml-2" src="/imgs/plus-button.svg"/>
+                        </button>
+                        <div id="appointments-info" class="text-blue ml-auto">
+                            <div class="flex items-center">
+                                <p class="mr-2">More Info</p>
+                                <embed src="/imgs/information-button.svg" class="h-4 w-4"/>
+                            </div>
+                            <div id="appointments-info-text" class="font-semibold">
+                                The calendars after adding an appointment are just for visual representation. To modify an appointment click on the "edit" button beside the appointment. There are at most 20 appointments in the list at a time.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a href="/default" id="back-to-overview-button" class="ml-8 mb-8 text-blue text-xl">&larr; Back to Overview</a>
+            </div>
+            <div id="footer">
+                &#169; <a href="/" class="mr-4 link">CalenDR</a>&#x2022;<a href="/tos" class="ml-4 link mr-8">Terms of Service</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="mobile-dashboard-nav" class="break mt-auto flex items-center">
+        <a href="/" class="mx-auto flex flex-wrap justify-center">
+            <embed src="/imgs/home-icon.svg"/>
+            <p class="text-gray">Home</p>
+        </a>
+
+        <a href="/default" class="mx-auto flex flex-wrap justify-center">
+            <embed src="/imgs/footer-icon-1.svg"/>
+            <p class="text-blue">Overview</p>
+        </a>
+
+        <a href="/dashboard/settings" class="mx-auto flex flex-wrap justify-center">
+            <embed src="/imgs/settings-gear-gray.svg"/>
+            <p class="text-gray">Settings</p>
+        </a>
+</body>
+</html>

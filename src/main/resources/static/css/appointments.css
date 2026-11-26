@@ -1,0 +1,271 @@
+@media only screen and (max-width: 1000px) {
+    :root{
+        font-size: 0.95rem !important;
+    }
+
+    nav{
+        display: none !important;
+    }
+
+    #footer{
+        display: none;
+    }
+
+    body #appointments{
+        margin-left: 0;
+        width: 100%;
+    }
+
+    body #appointment-list{
+        width: auto;
+        margin-right: 2rem;
+    }
+
+    #disclaimer{
+        margin-bottom: 8rem;
+        margin-right: 2rem;
+    }
+
+    .mb-8{
+        margin-bottom: 1rem;
+    }
+
+    body #mobile-dashboard-nav{
+        display: flex;
+        position: fixed;
+        bottom: 0;
+        width: 100vw;
+        background-color: white;
+        height: min-content;
+        box-shadow: 0px 0px 10px 5px rgba(57, 81, 94, 0.09);
+        z-index: 9999;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+
+    body #mobile-dashboard-nav embed{
+        display: block;
+        flex-basis: 100%;
+        height: 1rem;
+        opacity: 100%;
+        margin-bottom: 0.1rem;
+    }
+
+    body #mobile-dashboard-nav a:hover{
+        opacity: 50%;
+    }
+
+    body #appointments-info{
+        margin-top: 0.5rem;
+    }
+
+    body #appointments-info-text{
+        width: 10rem;
+    }
+
+    body #add-appointment-button-container{
+        display: block;
+    }
+
+    body #appointment-list-container{
+        display: block;
+    }
+
+    body #back-to-overview-button{
+        display: block;
+    }
+
+    body #add-appointment-type,
+    body #immunization-type,
+    body #date-picker,
+    body #edit-appointment-type,
+    body #edit-date-picker{
+        display: block;
+    }
+}
+
+
+
+
+/*universal */
+:root{
+    font-size: 0.833vw;
+}
+
+body{
+    font-family: 'Satoshi', sans-serif;
+    margin: 0;
+    overflow: hidden;
+}
+
+nav{
+    width: 15vw;    
+    padding-left: 1.667vw;
+    padding-top: 1.667vw;
+}
+
+button {
+    all: unset;
+    cursor: pointer;
+}
+
+
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #d3d3d3;
+    border-radius: 1rem;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #b1b1b1;
+}
+
+
+
+/*extra utility classes*/
+.nav-link:hover{
+    opacity: 50%;
+}
+
+.link-active{
+    color: #1282f3;
+}
+
+.line-active{
+    background-color: #1282f3;
+    width: 0.167vw;
+    height: 2rem;
+}
+
+.line-inactive{
+    background-color: #d3d3d3;
+    width: 0.083vw;
+    margin-right: 1.1rem;
+    height: 2rem;
+}
+
+.w-half-card{
+    width: 48rem;
+}
+
+.text-xl-rem{
+    font-size: 1.042vw/* 20px */;
+    line-height: 1.458vw/* 28px */;
+}
+
+.mr-4-vw{
+    margin-right: 0.833vw;
+}
+
+.form{
+    box-shadow: 0px 0px 20px 5px rgba(57, 81, 94, 0.045);
+    background-color: #ecf2f9;
+    border-radius: 0.5rem;
+}
+
+.plus-button{
+    height: 1rem;
+}
+
+.save-confirm{
+    border-radius: 5rem;
+    background-color: #1282f3;
+    box-shadow: 0px 0px 10px 5px rgba(18, 130, 243, 0.1);
+    width: min-content;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.save-confirm:hover{
+    background-color: rgba(18, 130, 243, 0.85);
+}
+
+
+
+#appointments{
+    margin-left: 15vw;
+}
+
+#footer{
+    position: fixed;
+    right: -0.615rem;
+    bottom: 1rem;
+}
+
+#mobile-dashboard-nav{
+    display: none;
+}
+
+#appointment-list{
+    border-radius: 1rem;
+    box-shadow: 0px 0px 20px 5px rgba(57, 81, 94, 0.045);
+    background-color: white;
+    height: min-content;
+    width: 48rem;
+}
+
+.appointments-card{
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: min-content;
+    width: max-content;
+    box-shadow: 0px 0px 20px 5px rgba(57, 81, 94, 0.09);
+    border-radius: 1rem;
+    z-index: 100;
+    display: none;
+}
+
+#darkened-overlay{
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    z-index: 10;
+    background-color: rgba(0, 0, 0, 0.25);
+    display: none;
+}
+
+#custom-title{
+    display: none;
+}
+
+#cancer-type{
+    display: none;
+}
+
+#edit-custom-title{
+    display: none;
+}
+
+#edit-immunization-type{
+    display: none;
+}
+
+#edit-cancer-type{
+    display: none;
+}
+
+#appointments-info-text{
+    display: none;
+    position: absolute;
+    background-color: white;
+    box-shadow: 0px 0px 20px 5px rgba(57, 81, 94, 0.09);
+    border-radius: 0.5rem;
+    color: #031c35;
+    padding: 0.5rem;
+    width: 40rem;
+}
+
+#appointments-info:hover #appointments-info-text{
+    display: block;
+}
+
+#back-to-overview-button{
+    display: none;
+    margin-bottom: 8rem;
+}

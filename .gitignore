@@ -1,0 +1,52 @@
+HELP.md
+target/
+*.class
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### VS Code ###
+.vscode/
+.VSCodeCounter/
+
+### Secrets ###
+.env
+.env.*
+!.env.example
+!.env.*.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.keystore
+
+### extra ###
+src/main/frontend/node_modules/
+perl5i/
+node_modules.lnk
+src/main/resources/application.properties
+src/main/java/com/example/CalenDR/dbController.java
+src/main/java/com/example/CalenDR/emailSender.java

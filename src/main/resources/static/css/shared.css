@@ -1,0 +1,123 @@
+@media only screen and (max-width: 675px) {
+    body .text-6xl{
+        font-size: 8.889vw;        
+    }
+}
+
+
+@keyframes background-pan{
+    from{
+        background-position: 0% center;
+    }
+    to{
+        background-position: -200% center;
+    }
+}
+
+body{
+    font-family: 'Satoshi', sans-serif;
+    margin: 0;
+    overflow-x: hidden;
+    color: #031c35;
+}
+
+html{
+    width: 100vw;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+
+
+/* extra utility classes */
+.h-screen-third{
+    height: 19.398rem;
+}
+
+.h-screen-twothird{
+    height: 38.795rem;
+}
+
+.h-fullscreen{
+    height: 100vh;
+}
+
+.w-fullscreen{
+    width: 100vw;
+}
+
+.w-72-rem{
+    width: 72rem;
+}
+
+.w-70\.5-rem{
+    width: 70.5rem;
+}
+
+.w-40-rem{
+    width: 40rem;
+}
+
+.w-36-rem{
+    width: 36rem;
+}
+
+.w-30-rem{
+    width: 30rem;
+}
+
+.w-26\.5-rem{
+    width: 26.5rem;
+}
+
+
+.bg-whitesmoke{
+    background-color: #f4f7fb;
+}
+
+.box-shadow{
+    box-shadow: 0px 0px 20px 5px rgba(57, 81, 94, 0.09);
+}
+
+.text-gradient{
+    animation: background-pan 3s linear infinite;
+    background: linear-gradient(
+        to right,
+        #126ff3,
+        #12a8f3,
+        #12baf3,
+        #126ff3
+    );
+    background-size: 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    white-space: nowrap;
+}
+
+.text-blue{
+    color:#1282f3;
+}
+
+.text-red{
+    color: rgb(243, 18, 18);
+}
+
+.text-gray{
+    color: #b1b1b1;
+}
+
+.text-normal{
+    color: #031c35;
+}
+
+
+.img{
+    border-radius: 1rem;
+    box-shadow: 0px 0px 20px 5px rgba(57, 81, 94, 0.09);
+    overflow: hidden;
+    color: #031c35;
+}
+
+.break{
+    flex-basis: 100%;
+}

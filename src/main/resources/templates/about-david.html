@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta property="og:title" content="CalenDR"/> 
+    <meta property="og:description" content="Providing scheduling assistance when it comes to vaccinations & screenings"/> 
+    <meta property="og:image" content="/imgs/dashboardimg.png" /> 
+    <meta property="og:url" content="[redacted]" />
+
+    <link th:href="@{css/main.css}" rel="stylesheet" /> 
+    <link rel="stylesheet" href="/css/about.css">
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/shared.css">
+
+    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@1,900,700,500,301,701,300,501,401,901,400,2&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="/imgs/favicon.svg">
+
+    <title>David Kim</title>
+</head>
+
+
+<!--html-->
+<body>
+    <nav id="nav" class="text-xl font-medium">
+        <a href="/" id="home" class="font-extrabold text-3xl mr-4 ml-auto">CalenDR</a>
+        <a href="about" id="about" class="hover:opacity-60">About</a>
+        <a href="contact" id="contact" class="hover:opacity-60">Contact</a>
+        <a href="/FAQ" id="faq" class="hover:opacity-60">Frequently Asked</a>
+        <a href="/login" id="sign-in-button-container" class="mr-auto"><div id="sign-in-button-alt" class="text-xl py-2 px-4 text-white"><span th:text="${signUpText}"></span>&#8594;</div></a>
+        
+        <a id="burger-menu" class="hidden" href="#side-navbar">
+            <embed id="burger-menu-icon" src="/imgs/burger-menu-black.svg"/>
+        </a>
+        <div id="side-navbar">
+            <div class="flex items-center mb-2">
+                <a href="/" class="font-extrabold text-3xl">CalenDR</a>
+                <a href="" class="ml-auto font-bold">&#x2715;</a> 
+            </div>
+            <a href="/about" class="block link">About</a> 
+            <a href="/contact" class="block link">Contact</a> 
+            <a href="/FAQ" class="block link">Frequently Asked</a> 
+            <a href="tos" class="block link">Terms of Service</a> 
+            <a href="signup" class="block link">Sign up</a>
+            <a href="/login" id="sign-in-button-container-mobile" class="mr-auto block"><div id="sign-in-button-mobile" class="text-xl py-2 px-4"><span th:text="${signUpText}"></span>&#8594;</div></a>
+        </div>
+
+        <a id="back-to-top-button" href="#nav"><div id="back-to-top-arrow" class=""></div></a>
+    </nav>
+
+    <section class="pb-32 flex">
+        <div class="w-70.5-rem mx-auto flex">
+            <div id="about-text-container" class="mr-32 flex flex-wrap">
+                <div class="break">
+                    <div id="banner-text" class="w-30-rem mb-16">
+                        <p class="text-xl text-blue font-bold mb-2">About David</p>
+                        <p class="text-6xl font-bold">David Kim</p>
+                    </div>
+                    <div class="w-30-rem text-xl">
+                        <p class="mb-8">This isn’t some story of an individual who went through personal tragedy and struggle to overcome hardship and made a name for himself as a brilliant entrepreneur. </p>
+                        <p class="mb-8">No, David was your average, well behaved Canadian citizen who lived a very normal life. David was born from two immigrant parents from Seoul, South Korea who worked incredibly hard to start a new life in Canada and support their family of 4, took no days off, and always gave 110% to their children.</p>
+                        <p class="mb-8">At the young age of 55, David’s mother was diagnosed with stage 4 breast cancer, and was able to live 5 more years with her family before sadly passing. The cancer took the family by surprise; there were no significant warning signs or health changes until it was too late. Although sad, there are stories out there even more tragic.</p>
+                        <p class="mb-8">Life often passes by quicker than what we would like. One moment you feel life is creeping by, the other, a blur. Everyone is occupied with their own life, so much so that we forget to take a breath and check our own health. </p>
+                        <p class="mb-8">The health care system is strained. Doctors are overburdened with the growing population outpacing the amount of new doctors that enter the industry. </p>
+                        <p class="mb-8">More and more people do not have a family doctor. For the people with family doctors, they no longer have the time to follow up with every patient to let them know of any screenings & vaccinations upcoming for people. Combine that with how little the majority of the population do not even know when they should begin to start screening for specific cancers!</p>
+                        <p class="mb-8">David started CalenDR to help and aware people. Since cancer currently has no cure, the best method is early detection. CalenDR was created as a reminder tool to let people know not to forget about their health and to get checked.  CalenDR is the tool David wished he had for his mother. His hope, is that it can be a tool to help people all over the world take control of their health.</p>
+                    </div>
+                </div>
+            </div>
+            <div id="about-cards">
+                <div class="card overflow-hidden">
+                    <div class="h-1/2 overflow-hidden">
+                        <img class="card-img" src="/imgs/david.jpg"/>
+                    </div>
+                    <div class="p-8 flex flex-wrap h-1/2">
+                        <div>
+                            <p class="font-bold text-blue tag break">Founder &amp; CEO</p>
+                            <p class="text-3xl font-bold break mb-4">David Kim</p>
+                            <p class="break mb-4">This isn’t some story of an individual who went through personal tragedy and struggle to overcome hardship and made a&hellip;</p>
+                        </div>
+                        <a class="mt-auto text-blue hover:opacity-60" href="about-david">Read More →</a>
+                        <!-- <div id="david-info">
+                            <a class="mt-auto text-blue">Read More →</a>
+                            <div id="david-info-text">
+                                <p>This isn’t some story of an individual who went through personal tragedy and struggle to overcome hardship and made a name for himself as a brilliant entrepreneur. </p>
+                                <p>No, David was your average, well behaved Canadian citizen who lived a very normal life. David was born from two immigrant parents from Seoul, South Korea who worked incredibly hard to start a new life in Canada and support their family of 4, took no days off, and always gave 110% to their children.</p>
+                                <p>At the young age of 55, David’s mother was diagnosed with stage 4 breast cancer, and was able to live 5 more years with her family before sadly passing. The cancer took the family by surprise; there were no significant warning signs or health changes until it was too late. Although sad, there are stories out there even more tragic.</p>
+                                <br/>
+                                <p>Life often passes by quicker than what we would like. One moment you feel life is creeping by, the other, a blur. Everyone is occupied with their own life, so much so that we forget to take a breath and check our own health. </p>
+                                <br/>
+                                <p>The health care system is strained. Doctors are overburdened with the growing population outpacing the amount of new doctors that enter the industry. More and more people do not have a family doctor. For the people with family doctors, they no longer have the time to follow up with every patient to let them know of any screenings & vaccinations upcoming for people. Combine that with how little the majority of the population do not even know when they should begin to start screening for specific cancers!</p>
+                                <br/>
+                                <p>David started CalenDR to help and aware people. Since cancer currently has no cure, the best method is early detection. CalenDR was created as a reminder tool to let people know not to forget about their health and to get checked.  CalenDR is the tool David wished he had for his mother. His hope, is that it can be a tool to help people all over the world take control of their health.                        </p>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+                <div class="card overflow-hidden">
+                    <div class="h-1/2 overflow-hidden">
+                        <img src="/imgs/vincent.jpg"/>
+                    </div>
+                    <div class="p-8 flex flex-wrap h-1/2">
+                        <div>
+                            <p class="font-bold text-blue tag break">Founder &amp; CTO</p>
+                            <p class="text-3xl font-bold break mb-4">Vincent Qu</p>
+                            <p class="break mb-4">Vincent Qu is lead developer of CalenDR. He hopes to better the world by providing easy access to medical scheduling. </p>
+                        </div>
+                        <div id="vincent-info">
+                            <a class="mt-auto text-blue">Contact →</a>
+                            <div id="vincent-info-text">
+                                <a href="[redacted]" class="text-blue hover:underline">[redacted]</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="h-screen-third bg-white py-16 flex box-shadow">
+        <div class="w-72-rem mx-auto flex">
+            <div class="w-64 mr-16">
+                <p class="text-3xl font-bold">CalenDR</p> <br/>
+                <p class="">Providing scheduling assistance when it comes to vaccinations &amp; screenings. </p>
+            </div>
+            
+            <div class="ml-auto mr-8">
+                <p class="text-xl font-bold mb-2">Company</p>
+                <a href="/about" class="link">About us</a> <br/>
+                <a href="/contact" class="link">Contact</a> <br/>
+            </div>
+            <div class="mx-8">
+                <p class="text-xl font-bold mb-2">Services</p>
+                <p>Scheduling</p> 
+            </div>
+            <div class="ml-8">
+                <p class="text-xl font-bold mb-2">Resources</p>
+                <a href="/FAQ" class="link">FAQ</a> <br/>
+                <a href="/tos" class="link">Terms of Service</a> <br/>
+                <a href="/signup" class="link">Sign up</a> <br/>
+                <a href="/login" class="link">Login</a> <br/>
+                <a href="/password-reset" class="link">Forgot Password</a> <br/>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

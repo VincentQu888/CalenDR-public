@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta property="og:title" content="CalenDR"/> 
+    <meta property="og:description" content="Providing scheduling assistance when it comes to vaccinations & screenings"/> 
+    <meta property="og:image" content="/imgs/dashboardimg.png" /> 
+    <meta property="og:url" content="[redacted]" />
+
+    <link th:href="@{/css/main.css}" rel="stylesheet" /> 
+    <link rel="stylesheet" href="/css/settings.css">
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/shared.css">
+
+    <script src="/js/settings.js" defer></script>
+
+    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@1,900,700,500,301,701,300,501,401,901,400,2&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="/imgs/favicon.svg">
+
+    <title>Settings</title>
+</head>
+
+
+
+<body class="bg-whitesmoke">
+    <script>
+        var alertMessage = "[[${notification}]]";
+        if(alertMessage) {
+            alert(alertMessage);
+        }
+    </script>
+
+    <div class="flex">
+
+        <!--SETTINGS POPUPS-->
+        <form id="settings-card-name" name="settings-card-name" class="bg-white fixed p-6 settings-card" method="post">
+            <p class="font-bold mb-2 text-xl">Full Name</p>
+            <input th:placeholder="${name}" class="h-12 px-6 form w-48 mb-4" id="name-input" name="input"/>
+
+            <div class="w-full">
+                <div class="float-right">
+                    <button type="submit" onclick="saveName()" class="cursor-pointer break">
+                        <div class="flex h-12 font-bold save-confirm">
+                            <p class="m-auto text-white">Save</p>
+                        </div>
+                    </button>
+                </div>
+                <button class="hover:opacity-60 translate-y-1/2" onclick="hideName()">Cancel</button>
+            </div>
+
+            <input class="hidden" id="name-input-info" name="input-info">
+        </form>
+
+        <form id="settings-card-password" name="settings-card-password" class="bg-white fixed p-6 settings-card" method="post">
+            <p id="change-password-title" class="font-bold mb-2 text-xl">Change Password</p>
+            <input type="password" placeholder="Old Password" class="h-12 px-6 form mb-4 w-full" id="old-passworda" name="old-password"/>
+            <input type="password" placeholder="New Password" class="h-12 px-6 form mb-4 w-full" id="password-input" name="input"/>
+        
+            <div id="change-password-buttons" class="w-full">
+                <div class="float-right">
+                    <button type="submit" onclick="savePassword()" class="cursor-pointer break">
+                        <div class="flex h-12 font-bold save-confirm">
+                            <p class="m-auto text-white">Save</p>
+                        </div>
+                    </button>
+                </div>
+                <button class="hover:opacity-60 translate-y-1/2" onclick="hidePassword()">Cancel</button>
+            </div>
+        
+            <input class="hidden" id="password-input-info" name="input-info">
+        </form>
+        
+        <form id="settings-card-country" name="settings-card-country" class="bg-white fixed p-6 settings-card" method="post">
+            <p class="font-bold mb-2 text-xl">Country of Residence</p>
+            <select name="input" id="country-form" class="h-12 px-6 w-48 form mb-4">
+                <option value="Canada">Canada</option>
+                <option value="Other">Other</option>
+            </select>
+        
+            <div class="flex w-full items-center">
+                <button class="hover:opacity-60 mr-auto" onclick="hideCountry()">Cancel</button>
+                <div>
+                    <button type="button" onclick="saveCountry()" class="cursor-pointer break">
+                        <div class="flex h-12 font-bold save-confirm">
+                            <p class="m-auto text-white">Save</p>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        
+            <input class="hidden" id="country-input-info" name="input-info">
+        </form>
+        
+        <form id="settings-card-notification" name="settings-card-notification" class="bg-white fixed p-6 settings-card" method="post">
+            <p class="font-bold mb-2 text-xl">Notification Pref.</p>
+            <select name="input" id="notification-form" class="h-12 px-6 w-48 form mb-4">
+                <option value="0">Email</option>
+                <option value="1">Text/SMS (Work in progress, sorry!)</option>
+                <option value="2">Both (Work in progress, sorry!)</option>
+            </select>
+        
+            <div class="flex w-full items-center">
+                <button class="hover:opacity-60 mr-auto" onclick="hideNotification()">Cancel</button>
+                <div>
+                    <button type="button" onclick="saveNotification()" class="cursor-pointer break">
+                        <div class="flex h-12 font-bold save-confirm">
+                            <p class="m-auto text-white">Save</p>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        
+            <input class="hidden" id="notification-input-info" name="input-info">
+        </form>
+        
+        <form id="settings-card-immunization" name="settings-card-immunization" class="bg-white fixed p-6 settings-card" method="post">
+            <p class="font-bold mb-2 text-xl">Immunization Prog.</p>
+            <select name="input" id="immunization-form" class="h-12 px-6 w-48 form mb-4">
+                <option value="0">Early</option>
+                <option value="1">Slightly Behind</option>
+                <option value="2">Behind</option>
+                <option value="3">Very Late</option>
+            </select>
+        
+            <div class="flex w-full items-center">
+                <button class="hover:opacity-60 mr-auto" onclick="hideImmunization()">Cancel</button>
+                <div>
+                    <button type="button" onclick="saveImmunization()" class="cursor-pointer break">
+                        <div class="flex h-12 font-bold save-confirm">
+                            <p class="m-auto text-white">Save</p>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        
+            <input class="hidden" id="immunization-input-info" name="input-info">
+        </form>
+        
+        <form id="settings-card-sexuallyActive" name="settings-card-sexuallyActive" class="bg-white fixed p-6 settings-card" method="post">
+            <p class="font-bold mb-2 text-xl">Sexually Active Age</p>
+            <input type="number" name="input" id="sexuallyActive-input" class="h-12 px-6 form w-48 mb-4" min="0" max="100">
+        
+            <div class="flex w-full items-center">
+                <button class="hover:opacity-60 mr-auto" onclick="hideSexuallyActive()">Cancel</button>
+                <div>
+                    <button type="button" onclick="saveSexuallyActive()" class="cursor-pointer break" break>
+                        <div class="flex h-12 font-bold save-confirm">
+                            <p class="m-auto text-white">Save</p>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        
+            <input class="hidden" id="sexuallyActive-input-info" name="input-info">
+        </form>
+
+        <form id="settings-card-yearsSmoking" name="settings-card-yearsSmoking" class="bg-white fixed p-6 settings-card" method="post">
+            <p class="font-bold mb-2 text-xl">Years Smoking</p>
+            <input type="number" name="input" id="yearsSmoking-input" class="h-12 px-6 form w-48 mb-4" min="0" max="100">
+        
+            <div class="flex w-full items-center">
+                <button class="hover:opacity-60 mr-auto" onclick="hideSmoking()">Cancel</button>
+                <div>
+                    <button type="button" onclick="saveSmoking()" class="cursor-pointer break" break>
+                        <div class="flex h-12 font-bold save-confirm">
+                            <p class="m-auto text-white">Save</p>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        
+            <input class="hidden" id="yearsSmoking-input-info" name="input-info">
+        </form>
+        
+        <form id="settings-card-risks" name="settings-card-risks" class="bg-white fixed p-6 settings-card" method="post">
+            <p class="font-bold mb-2 text-xl">Family Risk Of</p>
+            <div class="flex items-center mb-2">
+                <span class="mr-2">Breast Cancer</span>
+                <label class="switch">
+                    <input type="checkbox" id="breast-cancer-check-box" name="breast-cancer-check-box" th:checked="${risk.contains('Breast Cancer')}">
+                    <span class="slider round"></span>
+                </label>
+            </div>
+
+            <div class="flex items-center mb-2">
+                <span class="mr-2">Lung Cancer</span>
+                <label class="switch">
+                    <input type="checkbox" id="lung-cancer-check-box" name="lung-cancer-check-box" th:checked="${risk.contains('Lung Cancer')}">
+                    <span class="slider round"></span>
+                </label>    
+            </div>
+
+            <div class="flex items-center mb-4">
+                <span class="mr-2">Prostate Cancer</span>
+                <label class="switch">
+                    <input type="checkbox" id="prostate-cancer-check-box" name="prostate-cancer-check-box" th:checked="${risk.contains('Prostate Cancer')}">
+                    <span class="slider round"></span>
+                </label>
+            </div>
+        
+            <div class="w-full">
+                <div class="float-right">
+                    <button type="submit" onclick="saveRisks()" class="cursor-pointer break">
+                        <div class="flex h-12 font-bold save-confirm">
+                            <p class="m-auto text-white">Save</p>
+                        </div>
+                    </button>
+                </div>
+                <button class="hover:opacity-60 translate-y-1/2" onclick="hideRisks()">Cancel</button>
+            </div>
+        
+            <input class="hidden" id="risks-input-info" name="input-info">
+        </form>
+        
+        <form id="settings-card-schedule" name="settings-card-schedule" class="bg-white fixed p-6 settings-card" method="post">
+            <p class="font-bold mb-2 text-xl">CalenDR Will Schedule</p>
+            <div class="flex items-center mb-2">
+                <span class="mr-2">Immunizations</span>
+                <label class="switch">
+                    <input type="checkbox" id="immunization-schedule-check-box" name="immunization-schedule-check-box" th:checked="${schedule.contains('Immunizations')}">
+                    <span class="slider round"></span>
+                </label>
+            </div>
+        
+            <div class="flex items-center mb-2">
+                <span class="mr-2">Cancer Screenings</span>
+                <label class="switch">
+                    <input type="checkbox" id="cancer-schedule-check-box" name="cancer-schedule-check-box" th:checked="${schedule.contains('Cancer Screenings')}">
+                    <span class="slider round"></span>
+                </label>
+            </div>
+        
+            <div class="flex items-center mb-4">
+                <span class="mr-2">Influenza Shots</span>
+                <label class="switch">
+                    <input type="checkbox" id="influenza-schedule-check-box" name="influenza-schedule-check-box" th:checked="${schedule.contains('Influenza Shots')}">
+                    <span class="slider round"></span>
+                </label>
+            </div>
+        
+            <div class="w-full">
+                <div class="float-right">
+                    <button type="submit" onclick="saveSchedule()" class="cursor-pointer break">
+                        <div class="flex h-12 font-bold save-confirm">
+                            <p class="m-auto text-white">Save</p>
+                        </div>
+                    </button>
+                </div>
+                <button class="hover:opacity-60 translate-y-1/2" onclick="hideSchedule()">Cancel</button>
+            </div>
+        
+            <input class="hidden" id="schedule-input-info" name="input-info">
+        </form>
+        
+        <form id="settings-card-delete" name="settings-card-delete" class="bg-white fixed p-6 settings-card" method="post">
+            <p id="settings-card-delete-title" class="font-bold mb-2 text-xl">Enter password to confirm account deletion.</p>
+            <input placeholder="Password" class="h-12 px-6 form mb-4 w-full" id="delete-password-input" name="input" type="password"/>
+        
+            <div class="flex w-full items-center">
+                <button id="delete-password-cancel" class="hover:opacity-60 mr-auto" onclick="hideDelete()">Cancel</button>
+                <div>
+                    <button id="delete-password-save" type="button" onclick="deleteConfirm()" class="cursor-pointer break">
+                        <div class="flex h-12 font-bold save-confirm">
+                            <p class="m-auto text-white">Confirm</p>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        
+            <input class="hidden" id="delete-input-info" name="input-info">
+        </form>
+
+        <div id="darkened-overlay"></div>
+
+
+
+        <nav class="font-medium bg-white h-screen flex flex-wrap fixed z-10 text-xl-rem">
+            <div class="break">
+                <a href="/" class="font-extrabold">CalenDR</a> <br/>
+
+                <div class="flex flex-wrap mt-4">
+                    <div class="h-auto mr-4-vw line-inactive"></div> <a href="/default" class="nav-link">Overview</a> <br/>
+
+                    <div class="break flex">
+                        <div class="h-auto mr-4-vw line-inactive"></div> <a href="/dashboard/appointments" class="nav-link">Appointments</a>
+                    </div> 
+
+                    <div class="break flex">
+                        <div class="h-auto mr-4-vw line-active"></div> <a href="/dashboard/settings" class="link-active">Settings</a>
+                    </div> 
+
+                    <div class="break flex">
+                        <div class="h-auto mr-4-vw line-inactive"></div> <a href="/FAQ" class="nav-link">FAQ</a>
+                    </div> 
+
+                    <div class="break flex">
+                        <div class="h-auto mr-4-vw line-inactive"></div> <a href="/contact" class="nav-link">Support</a>
+                    </div> 
+                </div>
+            </div>
+            <div class="mt-auto mb-8 mr-8">
+                <p class="text-gray text-lg font-semibold mb-2">To figure out where you can go for immunizations and cancer screenings, or how you can schedule them, call your family practitioner!</p>
+                <p class="text-lg font-semibold break text-blue">All Time-Based features use Eastern Standard Time.</p>
+            </div>
+        </nav>
+
+        <div id="settings" class="mt-8">
+            <div class="flex flex-wrap items-center mb-8">
+                <p class="ml-8 mb-2 text-3xl font-bold">Settings</p>
+                <p class="ml-8 text-xl break text-blue">Settings may take a few minutes to change.</p>
+            </div>
+
+            <div class="flex">
+                <div id="info-settings" class="ml-8 py-6 text-lg mb-16">
+                    <p class="text-xl font-bold mb-8 px-6">Basic Information</p>
+                    <button class="settings-link px-6 flex items-center mb-4" onclick="showName()">
+                        <div>
+                            <p class="font-semibold">Full Name</p>
+                            <p class="truncate" th:text="${name}"></p>
+                        </div>
+                        <p class="ml-auto font-bold">&rarr;</p>
+                    </button>
+                    <button class="settings-link px-6 flex items-center mb-4" onclick="showPassword()">
+                        <div>
+                            <p class="font-semibold">Password</p>
+                        </div>
+                        <p class="ml-auto font-bold">&rarr;</p>
+                    </button>
+                    <button class="settings-link px-6 flex items-center mb-4" onclick="showCountry()">
+                        <div>
+                            <p class="font-semibold">Country of Residence</p>
+                            <p class="truncate" th:text="${country}"></p>
+                        </div>
+                        <p class="ml-auto font-bold">&rarr;</p>
+                    </button>
+                    <button class="settings-link px-6 flex items-center mb-4" onclick="showNotification()">
+                        <div>
+                            <p class="font-semibold">Notification Preference</p>
+                            <p th:if="${notificationPreference == 0}">Email</p>
+                            <p th:if="${notificationPreference  == 1}">Text/SMS</p>
+                            <p th:if="${notificationPreference  == 2}">Email & Text/SMS</p>
+                        </div>
+                        <p class="ml-auto font-bold">&rarr;</p>
+                    </button>
+                    <div class="px-6 mb-4 truncate">
+                        <p class="font-semibold">Email</p>
+                        <p class="truncate" th:text="${email}"></p>
+                    </div>
+                    <div class="px-6 mb-4">
+                        <div>
+                            <p class="font-semibold">Age</p>
+                            <p th:text="${curAge}"></p>
+                        </div>
+                    </div>
+                    <div class="px-6 mb-4">
+                        <p class="font-semibold">Sex</p>
+                        <p th:if="${gender == 0}">Male</p>
+                        <p th:if="${gender == 1}">Female</p>
+                    </div>
+                    <div class="px-6 mb-8">
+                        <p class="font-semibold">Sign Up Date</p>
+                        <p th:text="${signUpDate}"></p>
+                    </div>
+                    <div class="px-6 flex w-full">
+                        <form th:action="@{/signOut}" method="post">
+                            <button class="font-semibold text-red cursor-pointer hover:opacity-60" type="submit">Sign Out</button>
+                        </form>
+                        <button class="font-semibold text-red ml-auto hover:opacity-60" onclick="deleteAccount()">Delete Account</button>
+                    </div>
+                </div>
+    
+                <div>
+                    <div id="medical-info-settings" class="ml-8 py-6 text-lg">
+                        <p class="text-xl font-bold mb-8 px-6">Medical Information</p>
+                        <button class="settings-link px-6 flex items-center mb-4" onclick="showSexuallyActive()">
+                            <div>
+                                <p class="font-semibold">Sexually Active Age</p>
+                                <p th:if="${sexuallyActiveAge == -1}">N/A</p>
+                                <div th:if="${sexuallyActiveAge != -1}">
+                                    <p th:text="${sexuallyActiveAge}"></p>
+                                </div>
+                            </div>
+                            <p class="ml-auto font-bold">&rarr;</p>
+                        </button>
+                        <button class="settings-link px-6 flex items-center mb-4" onclick="showSmoking()">
+                            <div>
+                                <p class="font-semibold">Years Smoking</p>
+                                <p th:if="${yearsSmoking == -1}">N/A</p>
+                                <div th:if="${yearsSmoking != -1}">
+                                    <p th:text="${yearsSmoking}"></p>
+                                </div>
+                            </div>
+                            <p class="ml-auto font-bold">&rarr;</p>
+                        </button>
+                        <button class="settings-link px-6 flex items-center mb-4" onclick="showRisks()">
+                            <div class="truncate w-half-card">
+                                <p class="font-semibold">Family Risk Of</p>
+                                <span th:each="next, iterStat : ${risk}">
+                                    <span th:text="${next}"></span><span th:if="${!iterStat.last}">,</span>
+                                </span>
+                            </div>
+                            <p class="ml-auto font-bold">&rarr;</p>
+                        </button>
+                        <button class="settings-link px-6 flex items-center mb-4" onclick="showSchedule()">
+                            <div class="truncate w-half-card">
+                                <p class="font-semibold">CalenDR Will Schedule</p>
+                                <span th:each="next, iterStat : ${schedule}">
+                                    <span th:text="${next}"></span><span th:if="${!iterStat.last}">,</span>
+                                </span>
+                            </div>
+                            <p class="ml-auto font-bold">&rarr;</p>
+                        </button>
+                        <div class="px-6 flex items-center">
+                            <div>
+                                <p class="font-semibold">Immunization Progress</p>
+                                <p th:if="${immunizationProgress == 0}">Early</p>
+                                <p th:if="${immunizationProgress == 1}">Slightly Behind</p>
+                                <p th:if="${immunizationProgress == 2}">Behind</p>
+                                <p th:if="${immunizationProgress == 3}">Very Late</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="footer">
+                &#169; <a href="/" class="mr-4 link">CalenDR</a>&#x2022;<a href="/tos" class="ml-4 link mr-8">Terms of Service</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="mobile-dashboard-nav" class="break mt-auto flex items-center">
+        <a href="/" class="mx-auto flex flex-wrap justify-center">
+            <embed src="/imgs/home-icon.svg"/>
+            <p class="text-gray">Home</p>
+        </a>
+
+        <a href="/default" class="mx-auto flex flex-wrap justify-center">
+            <embed src="/imgs/footer-icon-1-gray.svg"/>
+            <p class="text-gray">Overview</p>
+        </a>
+
+        <a href="/dashboard/settings" class="mx-auto flex flex-wrap justify-center">
+            <embed src="/imgs/settings-gear.svg"/>
+            <p class="text-blue">Settings</p>
+        </a>
+    </div>
+</body>
+</html>

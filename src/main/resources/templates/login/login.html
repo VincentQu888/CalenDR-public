@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link th:href="@{/css/main.css}" rel="stylesheet" /> 
+    <link rel="stylesheet" href="/css/login.css">
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/shared.css">
+
+    <script src="/js/login.js" defer></script>
+
+    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@1,900,700,500,301,701,300,501,401,901,400,2&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="/imgs/favicon.svg">
+
+    <title>Login</title>
+</head>
+
+
+
+<body class="w-screen">
+    <script>
+        var alertMessage = "[[${notification}]]";
+        if(alertMessage) {
+            alert(alertMessage);
+        }
+    </script>
+
+    <nav class="flex text-2xl font-medium pb-8 pt-16 mx-8">
+        <div class="mx-auto w-36-rem">
+            <a href="/" id="home" class="font-extrabold text-3xl mr-auto">CalenDR</a>
+        </div>
+    </nav>
+
+    <div id="login-card-container" class="flex mb-4">
+        <div id="login-card" class="mx-auto p-8 bg-white">
+            <p class="text-2xl font-bold">Sign in</p>
+            
+            <form id="form-container" th:action="@{/login}" method="post">
+                <p class="mt-8">Email</p>
+                <input type="email" name="email-form" id="email-form" class="h-12 px-4">
+                
+                <div class="flex mt-8"><span class="">Password</span> <a href="/password-reset" id="forgot-password" class="ml-auto link block">Forgot your password?</a> </div>
+                <div class="mb-2 relative">
+                    <input type="password" name="password-form" id="password-form" class="h-12 px-4"> 
+                    <img src="/imgs/eye-show.svg" id="toggle-show" alt="Toggle Visibility"/>
+                </div>
+                <input type="checkbox" name="remember-me-checkbox" id="remember-me-checkbox"/> Remember me
+        
+                <div>
+                    <button type="submit" class="cursor-pointer">
+                        <div id="sign-in-confirm" class="h-12 font-bold mt-8">
+                            <p class="m-auto text-white">Continue &rarr;</p>
+                        </div>
+                    </button>
+                </div>
+            </form>
+            <div class="mt-4">
+                <span class="font-bold">Don't have an account?</span> <a href="/signup" id="no-account-sign-up" class="font-bold">Sign up</a>
+            </div>
+        </div>
+    </div>
+    <div class="flex mb-8 mx-8">
+        <div class="w-card mx-auto"><a href="/" class="mr-4 link">© CalenDR</a>&#x2022;<a href="/tos" class="ml-4 link">Terms of Service</a></div>
+    </div>
+    <div class="flex mb-32 mx-8">
+        <div class="w-card mx-auto"><p>This site uses cookies to remember you after you log in! They will only be used for such and will only be active if the "Remember me" option is clicked. Cookies will expire after 30 days.</p></div>
+    </div>
+
+
+    <!--footer-->
+    <section class="h-screen-third bg-white py-16 flex box-shadow">
+        <div class="w-72-rem mx-auto flex">
+            <div class="w-64 mr-16">
+                <p class="text-3xl font-bold">CalenDR</p> <br/>
+                <p class="">Providing scheduling assistance when it comes to vaccinations &amp; screenings. </p>
+            </div>
+            
+            <div class="ml-auto mr-8">
+                <p class="text-xl font-bold mb-2">Company</p>
+                <a href="/about" class="link">About us</a> <br/>
+                <a href="/contact" class="link">Contact</a> <br/>
+            </div>
+            <div class="mx-8">
+                <p class="text-xl font-bold mb-2">Services</p>
+                <p>Scheduling</p> 
+            </div>
+            <div class="ml-8">
+                <p class="text-xl font-bold mb-2">Resources</p>
+                <a href="/FAQ" class="link">FAQ</a> <br/>
+                <a href="/tos" class="link">Terms of Service</a> <br/>
+                <a href="/signup" class="link">Sign up</a> <br/>
+                <a href="/login" class="link">Login</a> <br/>
+                <a href="/password-reset" class="link">Forgot Password</a> <br/>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
